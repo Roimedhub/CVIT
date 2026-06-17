@@ -60,16 +60,12 @@ export default function LoginPage() {
       #start-btn.disabled { background-color: #00FF99 !important; cursor: default !important; }
     `}</style>
     <div className="bg-m-pattern w-screen h-screen relative flex flex-col items-center overflow-hidden select-none">
-      <BackgroundPattern />
+      <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
       {/* Title */}
-      <div className="relative z-10 mt-6 flex-shrink-0">
-        <h1
-          className="font-pixel title-gradient tracking-wide"
-          style={{ WebkitTextStroke: '2px #7a0000', fontSize: 'clamp(28px, 4.5vw, 64px)' }}
-        >
-          MAN vs MACHINE
-        </h1>
+      <div className="relative z-10 mt-6 flex-shrink-0 flex justify-center">
+        <Image src="/ManVsMachine.svg" alt="MAN vs MACHINE" width={581} height={112}
+          style={{ width: 'clamp(280px, 42vw, 620px)', height: 'auto' }} priority />
       </div>
 
       {/* Main content — centered vertically in space above floor */}
