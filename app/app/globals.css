@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #2a2ab0;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+}
+
+/* MAN vs MACHINE title gradient */
+.title-gradient {
+  background: linear-gradient(180deg, #FFEF2C 0%, #F8D20B 20%, #FFA200 50%, #DE6006 75%, #D02404 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(3px 3px 0px #7a0000);
+}
+
+/* Background colour only — pattern rendered by BackgroundPattern component */
+.bg-m-pattern {
+  background-color: #2a2ab0;
+}
+
+/* Green START button — high specificity to beat Tailwind v4 layer */
+button.btn-start,
+button.btn-start:not(:disabled) {
+  background-color: #00FF99 !important;
+  background-image: none !important;
+  border: 4px solid #003322 !important;
+  box-shadow: 0 5px 0 #003322 !important;
+  color: #001a0d !important;
+  opacity: 1 !important;
+}
+
+button.btn-start:hover:not(:disabled) {
+  background-color: #33FFAA !important;
+}
+
+button.btn-start:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #003322 !important;
+}
+
+button.btn-start:disabled {
+  background-color: #00FF99 !important;
+  background-image: none !important;
+  opacity: 0.5 !important;
+}
+
+/* Input field styling */
+.game-input {
+  background: #1a1a6e;
+  border: 2px solid #3a3a9e;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+}
+
+.game-input:focus {
+  outline: none;
+  border-color: #6a6acf;
+}
+
+/* Robot sprite animation — 14 frames, 400×760px each */
+.robot-sprite {
+  width: 210px;
+  height: 400px;
+  background-image: url('/robot_sprite.png');
+  background-size: 2940px 400px; /* 14 × 210px width, scaled height */
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: robot-walk 1.1s steps(14) infinite;
+  image-rendering: pixelated;
+  transform: scaleX(-1);
+}
+
+@keyframes robot-walk {
+  from { background-position: 0 0; }
+  to   { background-position: -2940px 0; }
+}
+
+/* Floor — platform stage look */
+.floor-gradient {
+  background: linear-gradient(180deg, #5555d0 0%, #3a3ab8 40%, #2a2aa8 100%);
+  border-top: 3px solid #7070e8;
+  box-shadow: inset 0 4px 12px rgba(255,255,255,0.08);
+}
