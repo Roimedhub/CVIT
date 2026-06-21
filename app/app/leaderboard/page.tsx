@@ -35,10 +35,11 @@ export default function LeaderboardPage() {
       <div className="relative z-10 flex flex-col"
         style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
 
-        {/* Clip SVG to show only the title banner + doctor frame (y=0–640 out of 1745).
-            At sidebar width 32vw: natural height = 32vw × (1745/894) ≈ 62.4vw.
-            Cut at 640/1745 = 36.7% → 62.4vw × 0.367 ≈ 22.9vw */}
-        <div style={{ position: 'relative', width: '100%', height: '23vw', overflow: 'hidden', flexShrink: 0 }}>
+        {/* Clip SVG to show only the title banner + doctor frame.
+            Content width ≈ 28vw (32vw sidebar minus 2vw padding each side).
+            List rows start at y=665/1745 = 36.7% → 28 × 1.952 × 0.367 ≈ 20vw.
+            Use 18vw to stay safely above the first row. */}
+        <div style={{ position: 'relative', width: '100%', height: '18vw', overflow: 'hidden', flexShrink: 0 }}>
           <Image
             src="/Leaderboard_Overview.svg"
             alt="Leaderboard"
