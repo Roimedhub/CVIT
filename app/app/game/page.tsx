@@ -8,6 +8,8 @@ import BackgroundPattern from '../components/BackgroundPattern'
 export default function GamePage() {
   const router = useRouter()
   const [playerName, setPlayerName] = useState('Doctor name')
+  const [playerHospital, setPlayerHospital] = useState('Organization')
+  const [playerId, setPlayerId] = useState('')
   const [guess, setGuess] = useState('')
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
@@ -21,7 +23,11 @@ export default function GamePage() {
 
   useEffect(() => {
     const name = sessionStorage.getItem('playerName')
+    const hospital = sessionStorage.getItem('playerHospital')
+    const id = sessionStorage.getItem('playerId')
     if (name) setPlayerName(name)
+    if (hospital) setPlayerHospital(hospital)
+    if (id) setPlayerId(id)
   }, [])
 
   // Round 1: 3→2→1→GO! then start timer. Subsequent rounds: show "ROUND X" briefly.
@@ -49,6 +55,14 @@ export default function GamePage() {
   useEffect(() => {
     if (!timerActive) return
     if (timeLeft <= 0) {
+      // Save score to Supabase
+      if (playerId) {
+        fetch('/api/scores', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ player_id: playerId, score, rounds_played: round - 1 }),
+        }).catch(console.error)
+      }
       const t = setTimeout(() => setShowScore(true), 3000)
       return () => clearTimeout(t)
     }
@@ -300,10 +314,8 @@ export default function GamePage() {
 
                 {/* Doctor side */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16 }}>
-                  <Image src="/DoctorName.svg" alt="Doctor name" width={200} height={40}
-                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
-                  <Image src="/Organization.svg" alt="Organization" width={200} height={40}
-                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
+                  <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 16px)', color: '#fff' }}>{playerName}</span>
+                  <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1.1vw, 13px)', color: '#ccc' }}>{playerHospital}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
                     <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>60</span>
                     <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>

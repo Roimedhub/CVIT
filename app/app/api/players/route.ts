@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { supabase } from '../../../lib/supabase'
 
 export async function POST(req: NextRequest) {
   const { name, hospital } = await req.json()
@@ -7,8 +8,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Name and hospital are required' }, { status: 400 })
   }
 
-  // TODO: save to Supabase
-  // For now return a mock ID
-  const id = `player_${Date.now()}`
-  return NextResponse.json({ id, name, hospital })
+  const { data, error } = await supabase
+    .from('cvit_players')
+    .insert({ name, hospital })
+    .select('id, name, hospital')
+    .single()
+
+  if (error) {
+    console.error('Supabase error:', error)
+    return NextResponse.json({ error: 'Failed to save player' }, { status: 500 })
+  }
+
+  return NextResponse.json(data)
 }
