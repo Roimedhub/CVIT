@@ -287,35 +287,36 @@ export default function GamePage() {
             <div style={{
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'column',
-              alignItems: 'center', justifyContent: 'space-between',
-              padding: '6% 8% 8%',
+              alignItems: 'center',
+              padding: '5% 8% 7%',
+              gap: '6%',
             }}>
               {/* Game Score title */}
               <Image src="/GameScore.svg" alt="GAME SCORE" width={400} height={80}
-                style={{ width: '70%', height: 'auto' }} />
+                style={{ width: '70%', height: 'auto', flexShrink: 0 }} />
 
               {/* Two columns */}
-              <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', flex: 1 }}>
 
                 {/* Doctor side */}
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '6%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16 }}>
                   <Image src="/DoctorName.svg" alt="Doctor name" width={200} height={40}
                     style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
                   <Image src="/Organization.svg" alt="Organization" width={200} height={40}
                     style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: '4%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
                     <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>60</span>
                     <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
                   </div>
                 </div>
 
                 {/* AI side */}
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
                   <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={200} height={40}
                     style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
                   <Image src="/MedhubAI.svg" alt="Medhub.AI" width={200} height={40}
                     style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: '4%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
                     <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>85</span>
                     <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
                   </div>
