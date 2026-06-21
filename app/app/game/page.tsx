@@ -21,6 +21,13 @@ export default function GamePage() {
   const [showScore, setShowScore] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  // After Game Score shows for 7 seconds, navigate to leaderboard
+  useEffect(() => {
+    if (!showScore) return
+    const t = setTimeout(() => router.push('/leaderboard'), 7000)
+    return () => clearTimeout(t)
+  }, [showScore, router])
+
   useEffect(() => {
     const name = sessionStorage.getItem('playerName')
     const hospital = sessionStorage.getItem('playerHospital')
