@@ -35,12 +35,10 @@ export default function LeaderboardPage() {
       <div className="relative z-10 flex flex-col"
         style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
 
-        {/* Show only the top portion of the SVG (title banner + doctor frame).
-            The SVG viewBox is 894×1745. The header+avatar takes ~43% of the height.
-            We clip by limiting container height to 43% of the SVG's natural rendered height.
-            Natural rendered height = width × (1745/894) ≈ width × 1.952
-            Clip height = 1.952 × 0.43 × width ≈ 0.84 × width → padding-bottom trick */}
-        <div style={{ position: 'relative', width: '100%', overflow: 'hidden', height: '84%', maxHeight: '44vw' }}>
+        {/* Clip SVG to show only the title banner + doctor frame (y=0–640 out of 1745).
+            At sidebar width 32vw: natural height = 32vw × (1745/894) ≈ 62.4vw.
+            Cut at 640/1745 = 36.7% → 62.4vw × 0.367 ≈ 22.9vw */}
+        <div style={{ position: 'relative', width: '100%', height: '23vw', overflow: 'hidden', flexShrink: 0 }}>
           <Image
             src="/Leaderboard_Overview.svg"
             alt="Leaderboard"
