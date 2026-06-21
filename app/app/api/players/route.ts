@@ -21,3 +21,23 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(data)
 }
+
+export async function PATCH(req: NextRequest) {
+  const { id, xp } = await req.json()
+
+  if (!id) {
+    return NextResponse.json({ error: 'id is required' }, { status: 400 })
+  }
+
+  const { error } = await supabase
+    .from('cvit_players')
+    .update({ xp })
+    .eq('id', id)
+
+  if (error) {
+    console.error('Supabase error:', error)
+    return NextResponse.json({ error: 'Failed to update XP' }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}

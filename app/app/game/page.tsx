@@ -9,6 +9,7 @@ export default function GamePage() {
   const router = useRouter()
   const [playerName, setPlayerName] = useState('Doctor name')
   const [playerHospital, setPlayerHospital] = useState('Organization')
+  const [playerId, setPlayerId] = useState('')
   const [guess, setGuess] = useState('')
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
@@ -23,8 +24,10 @@ export default function GamePage() {
   useEffect(() => {
     const name = sessionStorage.getItem('playerName')
     const hospital = sessionStorage.getItem('playerHospital')
+    const id = sessionStorage.getItem('playerId')
     if (name) setPlayerName(name)
     if (hospital) setPlayerHospital(hospital)
+    if (id) setPlayerId(id)
   }, [])
 
   // Round 1: 3→2→1→GO! then start timer. Subsequent rounds: show "ROUND X" briefly.
@@ -52,6 +55,14 @@ export default function GamePage() {
   useEffect(() => {
     if (!timerActive) return
     if (timeLeft <= 0) {
+      // TODO: replace 60 with real XP when scoring is implemented
+      if (playerId) {
+        fetch('/api/players', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: playerId, xp: 60 }),
+        }).catch(console.error)
+      }
       const t = setTimeout(() => setShowScore(true), 3000)
       return () => clearTimeout(t)
     }
