@@ -13,6 +13,8 @@ export default function GamePage() {
   const [score, setScore] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
   const [isPlaying, setIsPlaying] = useState(true)
+  const [timeLeft, setTimeLeft] = useState(90)
+  const [showScore, setShowScore] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -32,6 +34,18 @@ export default function GamePage() {
     }, 900)
     return () => clearInterval(interval)
   }, [round])
+
+  // 90-second game timer
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      const t = setTimeout(() => setShowScore(true), 3000)
+      return () => clearTimeout(t)
+    }
+    const t = setTimeout(() => setTimeLeft(s => s - 1), 1000)
+    return () => clearTimeout(t)
+  }, [timeLeft])
+
+  const formatTime = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
   const togglePlay = () => {
     const v = videoRef.current
@@ -85,16 +99,13 @@ export default function GamePage() {
           </div>
         </div>
 
-        {/* Center — title + round */}
+        {/* Center — round + timer */}
         <div className="flex flex-col items-center gap-1">
-          <Image src="/ManVsMachine.svg" alt="MAN vs MACHINE" width={581} height={112}
-            style={{ width: 'clamp(120px, 18vw, 280px)', height: 'auto' }} />
-          {/* RoundNumber badge */}
+          {/* ROUND badge */}
           <div style={{
             background: '#6E71FF',
-            borderRadius: '8px 8px 0 0',
-            padding: 'clamp(6px, 1vh, 10px) clamp(14px, 2vw, 28px)',
-            border: 'none',
+            borderRadius: 8,
+            padding: 'clamp(4px, 0.8vh, 8px) clamp(14px, 2vw, 28px)',
           }}>
             <span style={{
               fontFamily: "'Press Start 2P', monospace",
@@ -105,6 +116,21 @@ export default function GamePage() {
               letterSpacing: '0.05em',
               lineHeight: 1,
             }}>ROUND {round}</span>
+          </div>
+          {/* Timer — styled like Timer.svg: yellow, black outline */}
+          <div style={{ position: 'relative' }}>
+            <Image src="/Timer.svg" alt="timer" width={326} height={88}
+              style={{ width: 'clamp(100px, 14vw, 200px)', height: 'auto', opacity: 0 }} />
+            <span style={{
+              position: 'absolute', inset: 0,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(16px, 2.4vw, 36px)',
+              color: timeLeft <= 10 ? '#ff4444' : '#F2DF00',
+              WebkitTextStroke: '2px #000',
+              textShadow: '3px 3px 0 #000',
+              lineHeight: 1,
+            }}>{formatTime(timeLeft)}</span>
           </div>
         </div>
 
@@ -198,6 +224,7 @@ export default function GamePage() {
           placeholder="Enter FFR Value"
           value={guess}
           onChange={e => setGuess(e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter' && guess) { setGuess(''); setRound(r => r + 1) } }}
         />
         <div
           role="button"
@@ -228,6 +255,67 @@ export default function GamePage() {
           </span>
         </div>
       </div>
+
+      {/* ── TIME OUT OVERLAY ── */}
+      {timeLeft <= 0 && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(10,10,50,0.75)', backdropFilter: 'blur(3px)' }}>
+          <Image src="/TIMEOUT.svg" alt="TIME OUT" width={600} height={200}
+            style={{ width: 'clamp(300px, 50vw, 700px)', height: 'auto' }} />
+        </div>
+      )}
+
+      {/* ── GAME SCORE OVERLAY ── */}
+      {showScore && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(10,10,50,0.85)', backdropFilter: 'blur(4px)' }}>
+          <div style={{ position: 'relative', width: 'clamp(340px, 55vw, 700px)' }}>
+            {/* Background rectangle */}
+            <Image src="/RectangleGameScore.png" alt="" width={700} height={400}
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 16 }} />
+
+            {/* Content overlay */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'space-between',
+              padding: '6% 8% 8%',
+            }}>
+              {/* Game Score title */}
+              <Image src="/GameScore.svg" alt="GAME SCORE" width={400} height={80}
+                style={{ width: '70%', height: 'auto' }} />
+
+              {/* Two columns */}
+              <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+
+                {/* Doctor side */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '6%' }}>
+                  <Image src="/DoctorName.svg" alt="Doctor name" width={200} height={40}
+                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
+                  <Image src="/Organization.svg" alt="Organization" width={200} height={40}
+                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: '4%' }}>
+                    <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>60</span>
+                    <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
+                  </div>
+                </div>
+
+                {/* AI side */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '6%' }}>
+                  <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={200} height={40}
+                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
+                  <Image src="/MedhubAI.svg" alt="Medhub.AI" width={200} height={40}
+                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: '4%' }}>
+                    <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>85</span>
+                    <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── COUNTDOWN OVERLAY ── */}
       {countdown !== null && (
