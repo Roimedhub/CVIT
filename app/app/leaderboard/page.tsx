@@ -39,7 +39,7 @@ export default function LeaderboardPage() {
             Content width ≈ 28vw (32vw sidebar minus 2vw padding each side).
             List rows start at y=665/1745 = 36.7% → 28 × 1.952 × 0.367 ≈ 20vw.
             Use 18vw to stay safely above the first row. */}
-        <div style={{ position: 'relative', width: '100%', height: '18vw', overflow: 'hidden', flexShrink: 0 }}>
+        <div style={{ position: 'relative', width: '100%', height: '15vw', overflow: 'hidden', flexShrink: 0 }}>
           <Image
             src="/Leaderboard_Overview.svg"
             alt="Leaderboard"
