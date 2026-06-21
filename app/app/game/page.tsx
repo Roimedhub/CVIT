@@ -12,8 +12,10 @@ export default function GamePage() {
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
+  const [roundBanner, setRoundBanner] = useState<number | null>(null)
   const [isPlaying, setIsPlaying] = useState(true)
   const [timeLeft, setTimeLeft] = useState(90)
+  const [timerActive, setTimerActive] = useState(false)
   const [showScore, setShowScore] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -22,28 +24,37 @@ export default function GamePage() {
     if (name) setPlayerName(name)
   }, [])
 
-  // Countdown logic — runs on mount and after each round
+  // Round 1: 3→2→1→GO! then start timer. Subsequent rounds: show "ROUND X" briefly.
   useEffect(() => {
-    const sequence: (number | 'GO!' | null)[] = [3, 2, 1, 'GO!', null]
-    let i = 0
-    setCountdown(3)
-    const interval = setInterval(() => {
-      i++
-      setCountdown(sequence[i] ?? null)
-      if (i >= sequence.length - 1) clearInterval(interval)
-    }, 900)
-    return () => clearInterval(interval)
+    if (round === 1) {
+      const sequence: (number | 'GO!' | null)[] = [3, 2, 1, 'GO!', null]
+      let i = 0
+      setCountdown(3)
+      const interval = setInterval(() => {
+        i++
+        const val = sequence[i] ?? null
+        setCountdown(val)
+        if (val === 'GO!') setTimerActive(true)
+        if (i >= sequence.length - 1) clearInterval(interval)
+      }, 900)
+      return () => clearInterval(interval)
+    } else {
+      setRoundBanner(round)
+      const t = setTimeout(() => setRoundBanner(null), 1500)
+      return () => clearTimeout(t)
+    }
   }, [round])
 
-  // 90-second game timer
+  // 90-second game timer — only ticks when active
   useEffect(() => {
+    if (!timerActive) return
     if (timeLeft <= 0) {
       const t = setTimeout(() => setShowScore(true), 3000)
       return () => clearTimeout(t)
     }
     const t = setTimeout(() => setTimeLeft(s => s - 1), 1000)
     return () => clearTimeout(t)
-  }, [timeLeft])
+  }, [timeLeft, timerActive])
 
   const formatTime = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
@@ -258,8 +269,7 @@ export default function GamePage() {
 
       {/* ── TIME OUT OVERLAY ── */}
       {timeLeft <= 0 && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(10,10,50,0.75)', backdropFilter: 'blur(3px)' }}>
+        <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ pointerEvents: 'none' }}>
           <Image src="/TIMEOUT.svg" alt="TIME OUT" width={600} height={200}
             style={{ width: 'clamp(300px, 50vw, 700px)', height: 'auto' }} />
         </div>
@@ -267,8 +277,7 @@ export default function GamePage() {
 
       {/* ── GAME SCORE OVERLAY ── */}
       {showScore && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(10,10,50,0.85)', backdropFilter: 'blur(4px)' }}>
+        <div className="absolute inset-0 z-50 flex items-center justify-center">
           <div style={{ position: 'relative', width: 'clamp(340px, 55vw, 700px)' }}>
             {/* Background rectangle */}
             <Image src="/RectangleGameScore.png" alt="" width={700} height={400}
@@ -313,6 +322,23 @@ export default function GamePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── ROUND BANNER (between rounds) ── */}
+      {roundBanner !== null && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(10,10,50,0.65)', backdropFilter: 'blur(2px)', pointerEvents: 'none' }}>
+          <div key={roundBanner} style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: 'clamp(40px, 8vw, 100px)',
+            color: '#ffffff',
+            textShadow: '6px 6px 0 #1a1a6e, -2px -2px 0 #3a3aae',
+            animation: 'countPop 1.5s ease-out forwards',
+            lineHeight: 1, textAlign: 'center',
+          }}>
+            ROUND {roundBanner}
           </div>
         </div>
       )}
