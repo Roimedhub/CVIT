@@ -35,42 +35,25 @@ export default function LeaderboardPage() {
       <div className="relative z-10 flex flex-col items-center"
         style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '2vh 2vw', flexShrink: 0 }}>
 
-        {/* Leaderboard title */}
-        <Image src="/Leaderboard-title.svg" alt="Leaderboard" width={400} height={100}
-          style={{ width: '90%', height: 'auto', marginBottom: '2vh' }} />
-
-        {/* Doctor frame avatar */}
-        <Image src="/Leaderboard-Doctor-frame.svg" alt="Doctor" width={120} height={140}
-          style={{ width: 'clamp(70px, 8vw, 110px)', height: 'auto', marginBottom: '2vh' }} />
-
-        {/* Leaderboard list background */}
+        {/* Full leaderboard graphic — title, doctor frame, and list area all in one SVG */}
         <div style={{ position: 'relative', width: '100%' }}>
-          <Image src="/Leaderboard_Overview.svg" alt="" width={400} height={600}
+          <Image src="/Leaderboard_Overview.svg" alt="Leaderboard" width={400} height={600}
             style={{ width: '100%', height: 'auto', display: 'block' }} />
 
-          {/* Player list overlay */}
+          {/* Player list overlaid on the bottom list area of the SVG */}
           <div style={{
-            position: 'absolute', inset: '8% 6% 6%',
+            position: 'absolute', left: '8%', right: '6%', bottom: '4%',
+            height: '42%',
             display: 'flex', flexDirection: 'column', justifyContent: 'space-around',
           }}>
-            {players.length === 0
-              ? Array.from({ length: 10 }, (_, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>
-                    {i + 1}. Doctor name
-                  </span>
-                  <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>1200 ⭐</span>
-                </div>
-              ))
-              : players.map((p, i) => (
-                <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>
-                    {i + 1}. {p.name}
-                  </span>
-                  <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
-                </div>
-              ))
-            }
+            {players.map((p, i) => (
+              <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>
+                  {i + 1}. {p.name}
+                </span>
+                <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
