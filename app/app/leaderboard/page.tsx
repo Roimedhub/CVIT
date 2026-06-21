@@ -32,29 +32,48 @@ export default function LeaderboardPage() {
       <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
       {/* ── LEFT SIDEBAR — Leaderboard ── */}
-      <div className="relative z-10 flex flex-col items-center"
-        style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '2vh 2vw', flexShrink: 0 }}>
+      <div className="relative z-10 flex flex-col"
+        style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
 
-        {/* Full leaderboard graphic — title, doctor frame, and list area all in one SVG */}
-        <div style={{ position: 'relative', width: '100%' }}>
-          <Image src="/Leaderboard_Overview.svg" alt="Leaderboard" width={400} height={600}
-            style={{ width: '100%', height: 'auto', display: 'block' }} />
+        {/* Show only the top portion of the SVG (title banner + doctor frame).
+            The SVG viewBox is 894×1745. The header+avatar takes ~43% of the height.
+            We clip by limiting container height to 43% of the SVG's natural rendered height.
+            Natural rendered height = width × (1745/894) ≈ width × 1.952
+            Clip height = 1.952 × 0.43 × width ≈ 0.84 × width → padding-bottom trick */}
+        <div style={{ position: 'relative', width: '100%', overflow: 'hidden', height: '84%', maxHeight: '44vw' }}>
+          <Image
+            src="/Leaderboard_Overview.svg"
+            alt="Leaderboard"
+            width={894}
+            height={1745}
+            style={{ width: '100%', height: 'auto', display: 'block', position: 'absolute', top: 0, left: 0 }}
+          />
+        </div>
 
-          {/* Player list overlaid on the bottom list area of the SVG */}
-          <div style={{
-            position: 'absolute', left: '8%', right: '6%', bottom: '4%',
-            height: '42%',
-            display: 'flex', flexDirection: 'column', justifyContent: 'space-around',
-          }}>
-            {players.map((p, i) => (
-              <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>
-                  {i + 1}. {p.name}
-                </span>
-                <span style={{ fontSize: 'clamp(7px, 0.9vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
-              </div>
-            ))}
-          </div>
+        {/* Real player list — rendered below the clipped header graphic */}
+        <div style={{
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          gap: 'clamp(4px, 0.9vh, 10px)',
+          paddingTop: 'clamp(4px, 1vh, 12px)',
+          paddingLeft: '2%',
+          paddingRight: '2%',
+        }}>
+          {players.map((p, i) => (
+            <div key={p.id} style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              background: 'rgba(10,10,60,0.45)',
+              borderRadius: 6,
+              padding: '2px 8px',
+            }}>
+              <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
+                {i + 1}. {p.name}
+              </span>
+              <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -72,7 +91,6 @@ export default function LeaderboardPage() {
           background: '#0a0a2e',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          {/* TODO: replace with engagement video */}
           <span style={{ fontSize: 'clamp(8px, 1vw, 12px)', color: '#7878e0' }}>Engagement video</span>
         </div>
       </div>
