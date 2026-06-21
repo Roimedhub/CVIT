@@ -321,8 +321,20 @@ export default function GamePage() {
 
                 {/* Doctor side */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16 }}>
-                  <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 16px)', color: '#fff' }}>{playerName}</span>
-                  <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1.1vw, 13px)', color: '#ccc' }}>{playerHospital}</span>
+                  <span style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: 'clamp(10px, 1.4vw, 16px)',
+                    color: '#FEEF2C',
+                    WebkitTextStroke: '1.5px #000',
+                    textShadow: '2px 2px 0 #000',
+                  }}>{playerName}</span>
+                  <span style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: 'clamp(8px, 1.1vw, 13px)',
+                    color: '#FEEF2C',
+                    WebkitTextStroke: '1px #000',
+                    textShadow: '2px 2px 0 #000',
+                  }}>{playerHospital}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
                     <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>60</span>
                     <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
