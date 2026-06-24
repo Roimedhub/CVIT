@@ -405,7 +405,7 @@ export default function GamePage() {
           <div style={{ position: 'relative', width: 'clamp(300px, 55vw, 810px)' }}>
             <Image src="/Round Result.svg" alt="Round Result" width={810} height={338}
               style={{ width: '100%', height: 'auto', display: 'block' }} />
-            {/* Three columns overlay */}
+            {/* Three columns overlay — solid bg on each value covers SVG placeholder text */}
             <div style={{
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'row',
@@ -414,89 +414,59 @@ export default function GamePage() {
             }}>
               {/* Doctor column */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(8px, 1vw, 12px)',
-                  color: '#fff',
-                }}>{playerName}</span>
+                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>{playerName}</span>
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(18px, 3vw, 40px)',
                   color: '#F2DF00',
                   textShadow: '3px 3px 0 #000',
+                  background: 'rgba(10,10,60,0.9)',
+                  padding: '2px 8px', borderRadius: 6,
                 }}>{currentGuess || '—'}</span>
               </div>
 
               {/* Center column: real FFR */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>Real FFR</span>
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(18px, 3vw, 40px)',
                   color: '#ffffff',
                   textShadow: '3px 3px 0 #000',
+                  background: 'rgba(10,10,60,0.9)',
+                  padding: '2px 8px', borderRadius: 6,
                 }}>0.85</span>
               </div>
 
               {/* Robot column */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(8px, 1vw, 12px)',
-                  color: '#fff',
-                }}>AutocathFFR</span>
+                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>AutocathFFR</span>
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(18px, 3vw, 40px)',
                   color: '#F2DF00',
                   textShadow: '3px 3px 0 #000',
+                  background: 'rgba(10,10,60,0.9)',
+                  padding: '2px 8px', borderRadius: 6,
                 }}>0.86</span>
               </div>
             </div>
           </div>
 
-          {/* XP animations — shown 1s after round result */}
+          {/* XP animation — shown 1s after round result, doctor side only */}
           {showXP && (
-            <>
-              {/* Left XP */}
-              <div style={{
-                position: 'absolute',
-                left: '12vw',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center',
-                animation: 'xpFloat 2s ease-out forwards',
-              }}>
-                <Image src="/XP Doctor.svg" alt="XP Doctor" width={148} height={78}
-                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(16px, 2vw, 28px)',
-                  color: '#F2DF00',
-                  textShadow: '3px 3px 0 #000',
-                  marginTop: -8,
-                }}>+16</span>
-              </div>
-
-              {/* Right XP */}
-              <div style={{
-                position: 'absolute',
-                right: '12vw',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center',
-                animation: 'xpFloat 2s ease-out forwards',
-              }}>
-                <Image src="/XP Robot.svg" alt="XP Robot" width={148} height={78}
-                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(16px, 2vw, 28px)',
-                  color: '#F2DF00',
-                  textShadow: '3px 3px 0 #000',
-                  marginTop: -8,
-                }}>+16</span>
-              </div>
-            </>
+            <div style={{
+              position: 'absolute',
+              left: '10vw',
+              top: '40%',
+              transform: 'translateY(-50%)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              animation: 'xpFloat 2s ease-out forwards',
+              pointerEvents: 'none',
+            }}>
+              <Image src="/XP Doctor.svg" alt="XP" width={148} height={78}
+                style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+            </div>
           )}
         </div>
       )}
