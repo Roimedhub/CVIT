@@ -112,6 +112,11 @@ export default function LoginPage() {
               100% { transform: scale(1); filter: brightness(1); }
             }
             .start-btn-press { animation: btnPress 0.7s ease-out; }
+            @keyframes loadingPulse {
+              0%, 100% { opacity: 1; transform: scale(1); }
+              50% { opacity: 0.6; transform: scale(0.95); }
+            }
+            .start-btn-loading { animation: loadingPulse 0.8s ease-in-out infinite; }
           `}</style>
           <div
             role="button"
@@ -125,14 +130,25 @@ export default function LoginPage() {
             style={{
               cursor: canStart ? 'pointer' : 'default',
               position: 'relative', zIndex: 20,
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/Start button.svg"
               alt={loading ? 'LOADING...' : 'START'}
+              className={loading ? 'start-btn-loading' : ''}
               style={{ width: 'clamp(120px, 13vw, 180px)', height: 'auto', display: 'block' }}
             />
+            {loading && (
+              <span style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: 'clamp(7px, 0.8vw, 10px)',
+                color: '#F2DF00',
+                letterSpacing: 2,
+                animation: 'loadingPulse 0.8s ease-in-out infinite',
+              }}>LOADING...</span>
+            )}
           </div>
 
           {/* Tutorial button — smaller than START */}

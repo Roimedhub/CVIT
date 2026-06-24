@@ -95,8 +95,8 @@ export default function LeaderboardPage() {
           <span style={{ fontSize: 'clamp(8px, 1vw, 12px)', color: '#7878e0' }}>Engagement video</span>
         </div>
 
-        {/* Play button — bottom right */}
-        <div style={{ width: '100%', maxWidth: 700, display: 'flex', justifyContent: 'flex-end' }}>
+        {/* Play button — bottom center */}
+        <div style={{ width: '100%', maxWidth: 700, display: 'flex', justifyContent: 'center' }}>
           <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/Play-Leaderboard.svg" alt="Play" style={{ width: 'clamp(100px, 12vw, 180px)', height: 'auto', display: 'block' }} />
