@@ -307,7 +307,7 @@ export default function GamePage() {
               position: 'absolute',
               left: '3%', top: '50%', transform: 'translateY(-50%)',
               width: '44%', height: '55%',
-              fontSize: 'clamp(10px, 1.3vw, 16px)',
+              fontSize: 'clamp(7px, 0.8vw, 10px)',
               background: 'transparent',
               border: 'none', outline: 'none',
               color: '#ffffff',
