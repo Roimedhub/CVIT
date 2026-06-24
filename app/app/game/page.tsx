@@ -12,6 +12,7 @@ export default function GamePage() {
   const [guess, setGuess] = useState('')
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
+  const [robotScore, setRobotScore] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
 
   const [isPlaying, setIsPlaying] = useState(true)
@@ -98,7 +99,11 @@ export default function GamePage() {
     setTimerActive(false)   // pause timer during transition
     setShowRoundResult(true)
 
-    setTimeout(() => setShowXP(true), 1000)
+    setTimeout(() => {
+      setShowXP(true)
+      setScore(s => s + 16)
+      setRobotScore(s => s + 20)
+    }, 1000)
 
     setTimeout(() => {
       setShowXP(false)
@@ -179,7 +184,7 @@ export default function GamePage() {
             <span className="text-white" style={{ fontSize: 10 }}>AutocathFFR</span>
             <div className="flex items-center gap-1">
               <span style={{ fontSize: 12 }}>⭐</span>
-              <span style={{ fontSize: 10, color: '#f8d20b' }}>0</span>
+              <span style={{ fontSize: 10, color: '#f8d20b' }}>{robotScore}</span>
             </div>
           </div>
         </div>
