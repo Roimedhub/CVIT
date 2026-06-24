@@ -1,0 +1,15 @@
+<svg width="900" height="700" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 47.1865H24.0195V23.1865H48.0195V0.00292969H851.457V23.1865H875.707V47.1865H899.465V652.687H875.707V676.687H851.457V699.8H47.957V676.562H23.8945V652.687H0V47.1865Z" fill="#686AF5"/>
+<rect x="12" y="652.555" width="12" height="605.31" transform="rotate(-180 12 652.555)" fill="black"/>
+<rect width="12" height="605.31" transform="matrix(1 -6.32915e-08 -1.20755e-07 -1 887.465 652.552)" fill="black"/>
+<rect x="24" y="676.555" width="12" height="24" transform="rotate(-180 24 676.555)" fill="black"/>
+<rect width="12" height="24" transform="matrix(1 -6.32915e-08 -1.20755e-07 -1 875.465 676.552)" fill="black"/>
+<rect width="12" height="24" transform="matrix(-1 6.32915e-08 1.20755e-07 1 24 23.2451)" fill="black"/>
+<rect x="875.465" y="23.2422" width="12" height="24" fill="black"/>
+<rect x="48" y="688.555" width="24" height="12" transform="rotate(-180 48 688.555)" fill="black"/>
+<rect width="24" height="12" transform="matrix(1 -6.32915e-08 -1.20755e-07 -1 851.465 688.552)" fill="black"/>
+<rect width="24" height="12" transform="matrix(-1 6.32915e-08 1.20755e-07 1 48 11.2451)" fill="black"/>
+<rect x="851.465" y="11.2422" width="24" height="12" fill="black"/>
+<rect width="803.464" height="11.2423" transform="matrix(1 -6.32915e-08 -1.20755e-07 -1 48 699.797)" fill="black"/>
+<rect width="803.464" height="11.2423" transform="matrix(1 -6.32915e-08 -1.20755e-07 -1 48 11.2422)" fill="black"/>
+</svg>

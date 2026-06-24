@@ -25,12 +25,12 @@ export default function GamePage() {
   const [currentGuess, setCurrentGuess] = useState('')
   const videoRef = useRef<HTMLVideoElement>(null)
 
-  // After Game Score shows for 7 seconds, navigate to leaderboard
+  // Navigate to game-score page when time is up
   useEffect(() => {
     if (!showScore) return
-    const t = setTimeout(() => router.push('/leaderboard'), 7000)
-    return () => clearTimeout(t)
-  }, [showScore, router])
+    sessionStorage.setItem('finalScore', String(score))
+    router.push('/game-score')
+  }, [showScore, router, score])
 
   useEffect(() => {
     const name = sessionStorage.getItem('playerName')
@@ -345,58 +345,6 @@ export default function GamePage() {
         <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ pointerEvents: 'none' }}>
           <Image src="/TIMEOUT.svg" alt="TIME OUT" width={600} height={200}
             style={{ width: 'clamp(300px, 50vw, 700px)', height: 'auto' }} />
-        </div>
-      )}
-
-      {/* ── GAME SCORE OVERLAY ── */}
-      {showScore && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center">
-          <div style={{ position: 'relative', width: 'clamp(340px, 55vw, 700px)' }}>
-            <Image src="/RectangleGameScore.png" alt="" width={700} height={400}
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 16 }} />
-            <div style={{
-              position: 'absolute', inset: 0,
-              display: 'flex', flexDirection: 'column',
-              alignItems: 'center',
-              padding: '5% 8% 7%',
-              gap: '6%',
-            }}>
-              <Image src="/GameScore.svg" alt="GAME SCORE" width={400} height={80}
-                style={{ width: '70%', height: 'auto', flexShrink: 0 }} />
-              <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', flex: 1 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16 }}>
-                  <span style={{
-                    fontFamily: "'Press Start 2P', monospace",
-                    fontSize: 'clamp(10px, 1.4vw, 16px)',
-                    color: '#FEEF2C',
-                    WebkitTextStroke: '1.5px #000',
-                    textShadow: '2px 2px 0 #000',
-                  }}>{playerName}</span>
-                  <span style={{
-                    fontFamily: "'Press Start 2P', monospace",
-                    fontSize: 'clamp(8px, 1.1vw, 13px)',
-                    color: '#FEEF2C',
-                    WebkitTextStroke: '1px #000',
-                    textShadow: '2px 2px 0 #000',
-                  }}>{playerHospital}</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
-                    <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>60</span>
-                    <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
-                  <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={200} height={40}
-                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
-                  <Image src="/MedhubAI.svg" alt="Medhub.AI" width={200} height={40}
-                    style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 24 }}>
-                    <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(18px, 2.5vw, 32px)', color: '#fff' }}>85</span>
-                    <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       )}
 
