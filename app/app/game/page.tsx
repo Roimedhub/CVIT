@@ -437,8 +437,6 @@ export default function GamePage() {
             }}>
               {/* Doctor column */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <Image src="/DoctorGame.svg" alt="Doctor" width={48} height={48}
-                  style={{ width: 48, height: 48, borderRadius: 6, border: '2px solid #f8d20b' }} />
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(8px, 1vw, 12px)',
@@ -456,11 +454,6 @@ export default function GamePage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(8px, 1vw, 12px)',
-                  color: '#fff',
-                }}>FFR result</span>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(18px, 3vw, 40px)',
                   color: '#ffffff',
                   textShadow: '3px 3px 0 #000',
@@ -469,8 +462,6 @@ export default function GamePage() {
 
               {/* Robot column */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <Image src="/RobotGame.svg" alt="Robot" width={48} height={48}
-                  style={{ width: 48, height: 48, borderRadius: 6, border: '2px solid #00e5ff' }} />
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(8px, 1vw, 12px)',
