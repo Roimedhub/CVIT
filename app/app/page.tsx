@@ -111,10 +111,7 @@ export default function LoginPage() {
             onKeyDown={e => e.key === 'Enter' && canStart && handleStart()}
             style={{
               cursor: canStart ? 'pointer' : 'default',
-              opacity: canStart ? 1 : 0.6,
               position: 'relative', zIndex: 20,
-              filter: canStart ? 'none' : 'grayscale(40%)',
-              transition: 'opacity 0.2s',
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
