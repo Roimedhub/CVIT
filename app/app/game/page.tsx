@@ -459,20 +459,30 @@ export default function GamePage() {
             </div>
           </div>
 
-          {/* XP animation — shown 1s after round result, doctor side only */}
+          {/* XP animations — shown 1s after round result */}
           {showXP && (
-            <div style={{
-              position: 'absolute',
-              left: '10vw',
-              top: '40%',
-              transform: 'translateY(-50%)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
-              animation: 'xpFloat 2s ease-out forwards',
-              pointerEvents: 'none',
-            }}>
-              <Image src="/XP Doctor.svg" alt="XP" width={148} height={78}
-                style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
-            </div>
+            <>
+              <div style={{
+                position: 'absolute', left: '5vw', top: '40%',
+                transform: 'translateY(-50%)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                animation: 'xpFloat 2s ease-out forwards',
+                pointerEvents: 'none',
+              }}>
+                <Image src="/XP Doctor.svg" alt="XP Doctor" width={148} height={78}
+                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+              </div>
+              <div style={{
+                position: 'absolute', right: '5vw', top: '40%',
+                transform: 'translateY(-50%)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                animation: 'xpFloat 2s ease-out forwards',
+                pointerEvents: 'none',
+              }}>
+                <Image src="/XP Robot.svg" alt="XP Robot" width={148} height={78}
+                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+              </div>
+            </>
           )}
         </div>
       )}
