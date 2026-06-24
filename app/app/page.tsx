@@ -117,12 +117,11 @@ export default function LoginPage() {
               transition: 'opacity 0.2s',
             }}
           >
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/Start button.svg"
               alt={loading ? 'LOADING...' : 'START'}
-              width={336}
-              height={92}
-              style={{ width: 'clamp(200px, 26vw, 336px)', height: 'auto', display: 'block' }}
+              style={{ width: 'clamp(160px, 18vw, 240px)', height: 'auto', display: 'block' }}
             />
           </div>
 
