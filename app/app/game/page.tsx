@@ -271,38 +271,22 @@ export default function GamePage() {
 
       {/* ── DOCTOR — absolutely positioned bottom-left ── */}
       <div style={{
-        position: 'absolute', bottom: '10vh', left: 0, zIndex: 15,
+        position: 'absolute', bottom: 0, left: 0, zIndex: 15,
         width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
         pointerEvents: 'none',
       }}>
         <Image src="/Doctor round.svg" alt="Doctor" width={300} height={420}
           style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
       </div>
-      <div style={{
-        position: 'absolute', bottom: '1vh', left: '2vw', zIndex: 15,
-        width: '12vw', display: 'flex', justifyContent: 'center',
-        pointerEvents: 'none',
-      }}>
-        <Image src="/Doctor buzzer.svg" alt="Doctor Buzzer" width={120} height={80}
-          style={{ width: '80%', height: 'auto', objectFit: 'contain' }} />
-      </div>
 
       {/* ── ROBOT — absolutely positioned bottom-right ── */}
       <div style={{
-        position: 'absolute', bottom: '10vh', right: 0, zIndex: 15,
+        position: 'absolute', bottom: 0, right: 0, zIndex: 15,
         width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
         pointerEvents: 'none',
       }}>
         <Image src="/Robot round.svg" alt="Robot" width={300} height={420}
           style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
-      </div>
-      <div style={{
-        position: 'absolute', bottom: '1vh', right: '2vw', zIndex: 15,
-        width: '12vw', display: 'flex', justifyContent: 'center',
-        pointerEvents: 'none',
-      }}>
-        <Image src="/Robot buzzer.svg" alt="Robot Buzzer" width={120} height={80}
-          style={{ width: '80%', height: 'auto', objectFit: 'contain' }} />
       </div>
 
       {/* ── BOTTOM INPUT BAR — Result input and button.svg ── */}
@@ -317,7 +301,7 @@ export default function GamePage() {
             alt=""
             width={531}
             height={105}
-            style={{ width: 'clamp(280px, 42vw, 531px)', height: 'auto', display: 'block' }}
+            style={{ width: 'clamp(180px, 26vw, 360px)', height: 'auto', display: 'block' }}
           />
           {/* Input — overlaid over the left dark area (0–48% of width) */}
           <input
@@ -340,24 +324,17 @@ export default function GamePage() {
             onChange={e => setGuess(e.target.value)}
             onKeyDown={e => { if (e.key === 'Enter' && guess) handleDone() }}
           />
-          {/* DONE! click area — overlaid over the right green button (52–98% of width) */}
+          {/* Invisible click area over the right green DONE! button in the SVG */}
           <div
             role="button"
             onClick={handleDone}
             style={{
               position: 'absolute',
-              left: '52%', top: '15%',
-              width: '46%', height: '70%',
+              left: '52%', top: '10%',
+              width: '46%', height: '80%',
               cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(10px, 1.3vw, 16px)',
-              color: '#ffffff',
-              userSelect: 'none',
             }}
-          >
-            DONE!
-          </div>
+          />
         </div>
       </div>
 
