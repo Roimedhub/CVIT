@@ -111,7 +111,7 @@ export default function LoginPage() {
               60%  { transform: scale(1.06); filter: brightness(0.9); }
               100% { transform: scale(1); filter: brightness(1); }
             }
-            .start-btn-press { animation: btnPress 0.35s ease-out; }
+            .start-btn-press { animation: btnPress 0.7s ease-out; }
           `}</style>
           <div
             role="button"
