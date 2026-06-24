@@ -417,14 +417,9 @@ export default function GamePage() {
             }}>
 
               {/* ── DOCTOR column ── */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8%' }}>
-                {/* Title: same avatar as header left */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
                 <img src="/DoctorGame.svg" alt="Doctor"
                   style={{ width: 'clamp(36px, 5vw, 64px)', height: 'auto', borderRadius: 6, border: '2px solid #f8d20b' }} />
-                {/* Number style SVG as label */}
-                <img src="/doctor result round summary.svg" alt="doctor result"
-                  style={{ width: '80%', height: 'auto' }} />
-                {/* Player's input */}
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(22px, 3.5vw, 48px)',
@@ -434,11 +429,9 @@ export default function GamePage() {
               </div>
 
               {/* ── CENTER column: Real FFR ── */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8%' }}>
-                {/* FFR Result title SVG */}
-                <img src="/FFR Result result round summary.svg" alt="FFR Result"
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+                <img src="/FFR Result Round Summary.svg" alt="FFR Result"
                   style={{ width: '90%', height: 'auto' }} />
-                {/* Icon + number side by side */}
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                   <img src="/FFR Result icon round summary.svg" alt=""
                     style={{ width: 'clamp(24px, 3vw, 42px)', height: 'auto' }} />
@@ -452,14 +445,9 @@ export default function GamePage() {
               </div>
 
               {/* ── ROBOT column ── */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8%' }}>
-                {/* Title: same avatar as header right */}
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
                 <img src="/RobotGame.svg" alt="Robot"
                   style={{ width: 'clamp(36px, 5vw, 64px)', height: 'auto', borderRadius: 6, border: '2px solid #00e5ff' }} />
-                {/* Number style SVG as label */}
-                <img src="/Robot result round summary.svg" alt="robot result"
-                  style={{ width: '80%', height: 'auto' }} />
-                {/* AI result */}
                 <span style={{
                   fontFamily: "'Press Start 2P', monospace",
                   fontSize: 'clamp(22px, 3.5vw, 48px)',
