@@ -540,16 +540,6 @@ export default function GamePage() {
           <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
             <Image src="/Next Round.svg" alt="Next Round" width={392} height={100}
               style={{ width: 'clamp(240px, 30vw, 392px)', height: 'auto', display: 'block' }} />
-            <span style={{
-              position: 'absolute',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(10px, 1.4vw, 18px)',
-              color: '#ffffff',
-              WebkitTextStroke: '1px #000',
-              textShadow: '2px 2px 0 #000',
-              lineHeight: 1,
-              pointerEvents: 'none',
-            }}>NEXT ROUND {round + 1}</span>
           </div>
         </div>
       )}
