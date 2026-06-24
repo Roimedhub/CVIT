@@ -109,13 +109,13 @@ export default function GamePage() {
       setShowXP(false)
       setShowRoundResult(false)
       setShowNextRound(true)
-    }, 3000)
+    }, 5000)
 
     setTimeout(() => {
       setShowNextRound(false)
       setRound(r => r + 1)
       setTimerActive(true)  // resume timer
-    }, 6000)
+    }, 8000)
   }
 
   return (
