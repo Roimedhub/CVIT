@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import BackgroundPattern from '../components/BackgroundPattern'
 
 export default function GamePage() {
   const router = useRouter()
@@ -19,6 +18,10 @@ export default function GamePage() {
   const [timeLeft, setTimeLeft] = useState(90)
   const [timerActive, setTimerActive] = useState(false)
   const [showScore, setShowScore] = useState(false)
+  const [showRoundResult, setShowRoundResult] = useState(false)
+  const [showXP, setShowXP] = useState(false)
+  const [showNextRound, setShowNextRound] = useState(false)
+  const [currentGuess, setCurrentGuess] = useState('')
   const videoRef = useRef<HTMLVideoElement>(null)
 
   // After Game Score shows for 7 seconds, navigate to leaderboard
@@ -62,7 +65,6 @@ export default function GamePage() {
   useEffect(() => {
     if (!timerActive) return
     if (timeLeft <= 0) {
-      // TODO: replace 60 with real XP when scoring is implemented
       if (playerId) {
         fetch('/api/players', {
           method: 'PATCH',
@@ -95,31 +97,57 @@ export default function GamePage() {
     v.currentTime = Math.min(v.duration, Math.max(0, v.currentTime + (e.deltaY > 0 ? step : -step)))
   }
 
-  const startNextRound = () => {
+  const handleDone = () => {
     if (!guess) return
+    setCurrentGuess(guess)
     setGuess('')
-    setRound(r => r + 1)
+    setShowRoundResult(true)
+
+    setTimeout(() => {
+      setShowXP(true)
+    }, 1000)
+
+    setTimeout(() => {
+      setShowXP(false)
+      setShowRoundResult(false)
+      setShowNextRound(true)
+    }, 3000)
+
+    setTimeout(() => {
+      setShowNextRound(false)
+      setRound(r => r + 1)
+    }, 4500)
   }
 
   return (
     <div
-      className="bg-m-pattern w-screen h-screen relative flex flex-col overflow-hidden select-none"
+      className="w-screen h-screen relative flex flex-col overflow-hidden select-none"
       style={{ fontFamily: "'Press Start 2P', monospace" }}
     >
       <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
-      {/* ── TOP HUD ── */}
-      <div className="relative z-10 flex items-center justify-between px-3 py-2 flex-shrink-0"
-        style={{ height: '13vh', background: 'rgba(0,0,0,0.25)' }}
+      {/* ── HEADER BAR ── */}
+      <div
+        className="relative z-10 flex-shrink-0 flex items-center justify-between px-4"
+        style={{ height: '13vh' }}
       >
+        {/* Header background image */}
+        <Image
+          src="/header background.png"
+          alt=""
+          fill
+          style={{ objectFit: 'cover', zIndex: -1 }}
+          priority
+        />
+
         {/* Doctor side */}
         <div className="flex items-center gap-2">
           <div style={{
-            width: 64, height: 64, border: '3px solid #f8d20b',
+            width: 56, height: 56, border: '3px solid #f8d20b',
             borderRadius: 6, overflow: 'hidden', flexShrink: 0,
-            background: '#1a1a6e'
+            background: '#1a1a6e',
           }}>
-            <Image src="/DoctorGame.svg" alt="Doctor" width={64} height={64}
+            <Image src="/DoctorGame.svg" alt="Doctor" width={56} height={56}
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col gap-1">
@@ -131,25 +159,9 @@ export default function GamePage() {
           </div>
         </div>
 
-        {/* Center — round + timer */}
+        {/* Center — timer + round badge */}
         <div className="flex flex-col items-center gap-1">
-          {/* ROUND badge */}
-          <div style={{
-            background: '#6E71FF',
-            borderRadius: 8,
-            padding: 'clamp(4px, 0.8vh, 8px) clamp(14px, 2vw, 28px)',
-          }}>
-            <span style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(11px, 1.6vw, 20px)',
-              color: '#ffffff',
-              WebkitTextStroke: '1px #000',
-              textShadow: '2px 2px 0 #000',
-              letterSpacing: '0.05em',
-              lineHeight: 1,
-            }}>ROUND {round}</span>
-          </div>
-          {/* Timer — styled like Timer.svg: yellow, black outline */}
+          {/* Timer */}
           <div style={{ position: 'relative' }}>
             <Image src="/Timer.svg" alt="timer" width={326} height={88}
               style={{ width: 'clamp(100px, 14vw, 200px)', height: 'auto', opacity: 0 }} />
@@ -157,23 +169,44 @@ export default function GamePage() {
               position: 'absolute', inset: 0,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(16px, 2.4vw, 36px)',
+              fontSize: 'clamp(20px, 2.8vw, 42px)',
               color: timeLeft <= 10 ? '#ff4444' : '#F2DF00',
               WebkitTextStroke: '2px #000',
               textShadow: '3px 3px 0 #000',
               lineHeight: 1,
             }}>{formatTime(timeLeft)}</span>
           </div>
+
+          {/* ROUND badge using Round x background.png */}
+          <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              src="/Round x background.png"
+              alt=""
+              width={160}
+              height={36}
+              style={{ width: 'clamp(100px, 12vw, 180px)', height: 'auto', display: 'block' }}
+            />
+            <span style={{
+              position: 'absolute',
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(9px, 1.2vw, 15px)',
+              color: '#ffffff',
+              WebkitTextStroke: '1px #000',
+              textShadow: '2px 2px 0 #000',
+              lineHeight: 1,
+              pointerEvents: 'none',
+            }}>ROUND {round}</span>
+          </div>
         </div>
 
         {/* AI side */}
         <div className="flex items-center gap-2 flex-row-reverse">
           <div style={{
-            width: 64, height: 64, border: '3px solid #00e5ff',
+            width: 56, height: 56, border: '3px solid #00e5ff',
             borderRadius: 6, overflow: 'hidden', flexShrink: 0,
-            background: '#1a1a6e'
+            background: '#1a1a6e',
           }}>
-            <Image src="/RobotGame.svg" alt="AI" width={64} height={64}
+            <Image src="/RobotGame.svg" alt="AI" width={56} height={56}
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col items-end gap-1">
@@ -187,104 +220,166 @@ export default function GamePage() {
       </div>
 
       {/* ── MAIN AREA ── */}
-      <div className="relative z-10 flex flex-1 items-center min-h-0 px-2 gap-2" style={{ paddingBottom: '11vh' }}>
-
-        {/* Doctor buzzer (left) */}
-        <div className="flex-shrink-0 flex items-center justify-center h-full" style={{ width: '14vw' }}>
-          <Image src="/OrangeBuzzer.svg" alt="Doctor Buzzer" width={180} height={180}
-            className="object-contain" style={{ width: 'clamp(80px, 10vw, 160px)', height: 'auto' }}
+      <div
+        className="relative z-10 flex flex-1 min-h-0"
+        style={{ paddingBottom: '12vh' }}
+      >
+        {/* Left column: Doctor round + buzzer */}
+        <div
+          className="flex-shrink-0 flex flex-col items-center justify-between py-2"
+          style={{ width: '15vw' }}
+        >
+          <Image
+            src="/Doctor round.svg"
+            alt="Doctor"
+            width={200}
+            height={300}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
+          <Image
+            src="/Doctor buzzer.svg"
+            alt="Doctor Buzzer"
+            width={120}
+            height={80}
+            style={{ width: '70%', height: 'auto', objectFit: 'contain' }}
           />
         </div>
 
-        {/* Center content — video + frame side by side */}
-        <div className="flex-1 flex flex-row items-center justify-center gap-3 h-full min-w-0">
-
-          {/* Angiogram video — 512×512 */}
-          <div
-            onClick={togglePlay}
-            onWheel={handleScroll}
-            style={{
-              width: 'min(68vh, 40vw)', height: 'min(68vh, 40vw)',
-              flexShrink: 0,
-              border: '3px solid #7878e0', borderRadius: 12,
-              background: '#000', overflow: 'hidden',
-              cursor: 'pointer', position: 'relative',
-            }}
-          >
-            <video
-              ref={videoRef}
-              key={round}
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-            >
-              <source src="/round1_h264.mp4" type="video/mp4" />
-            </video>
-          </div>
-
-          {/* Game frame — 512×512 */}
+        {/* Center: video + frame in framing container */}
+        <div className="flex-1 flex items-center justify-center min-w-0 px-2">
           <div style={{
-            width: 'min(68vh, 40vw)', height: 'min(68vh, 40vw)',
-            flexShrink: 0,
-            border: '3px solid #7878e0', borderRadius: 12,
-            background: '#0a0a2e', overflow: 'hidden',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            display: 'flex', flexDirection: 'row',
+            alignItems: 'center', justifyContent: 'center',
+            gap: 12,
+            background: '#0d0d2e',
+            border: '3px solid #6E71FF',
+            borderRadius: 16,
+            padding: 10,
+            boxShadow: '0 0 24px rgba(110,113,255,0.4)',
+            maxHeight: '100%',
           }}>
-            <Image src="/TestFrame.png" alt="Game frame" width={512} height={512}
-              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            {/* Angiogram video */}
+            <div
+              onClick={togglePlay}
+              onWheel={handleScroll}
+              style={{
+                width: 'min(55vh, 33vw)', height: 'min(55vh, 33vw)',
+                flexShrink: 0,
+                border: '2px solid #3a3a9e', borderRadius: 8,
+                background: '#000', overflow: 'hidden',
+                cursor: 'pointer', position: 'relative',
+              }}
+            >
+              <video
+                ref={videoRef}
+                key={round}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+              >
+                <source src="/round1_h264.mp4" type="video/mp4" />
+              </video>
+            </div>
+
+            {/* Game frame */}
+            <div style={{
+              width: 'min(55vh, 33vw)', height: 'min(55vh, 33vw)',
+              flexShrink: 0,
+              border: '2px solid #3a3a9e', borderRadius: 8,
+              background: '#0a0a2e', overflow: 'hidden',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Image src="/TestFrame.png" alt="Game frame" width={512} height={512}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            </div>
           </div>
         </div>
 
-        {/* Robot buzzer (right) */}
-        <div className="flex-shrink-0 flex items-center justify-center h-full" style={{ width: '14vw' }}>
-          <Image src="/GreenBuzzer.svg" alt="Robot Buzzer" width={180} height={180}
-            className="object-contain" style={{ width: 'clamp(80px, 10vw, 160px)', height: 'auto' }}
+        {/* Right column: Robot round + buzzer */}
+        <div
+          className="flex-shrink-0 flex flex-col items-center justify-between py-2"
+          style={{ width: '15vw' }}
+        >
+          <Image
+            src="/Robot round.svg"
+            alt="Robot"
+            width={200}
+            height={300}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
+          <Image
+            src="/Robot buzzer.svg"
+            alt="Robot Buzzer"
+            width={120}
+            height={80}
+            style={{ width: '70%', height: 'auto', objectFit: 'contain' }}
           />
         </div>
       </div>
 
       {/* ── BOTTOM INPUT BAR ── */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center gap-3" style={{ height: '11vh' }}>
-        <input
-          className="game-input rounded px-3"
-          style={{ fontSize: 11, height: '5.5vh', width: 'clamp(300px, 50vw, 640px)',
-            background: 'rgba(10,10,60,0.85)', border: '2px solid #3a3a9e', borderRadius: 10 }}
-          type="number"
-          min="0" max="1" step="0.01"
-          placeholder="Enter FFR Value"
-          value={guess}
-          onChange={e => setGuess(e.target.value)}
-          onKeyDown={e => { if (e.key === 'Enter' && guess) { setGuess(''); setRound(r => r + 1) } }}
-        />
-        <div
-          role="button"
-          onClick={() => {
-            if (!guess) return
-            setGuess('')
-            setRound(r => r + 1)
-          }}
-          style={{
-            cursor: 'pointer', flexShrink: 0,
-            padding: '0 24px',
-            height: '5.5vh',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            lineHeight: 1,
-            borderRadius: 14,
-            background: 'linear-gradient(180deg, #02D2AC 59%, #83E4C2 75%, #1FB883 86.5%, #023730 100%)',
-            border: '4px solid #000',
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: 'clamp(13px, 1.4vw, 18px)',
-            color: '#ffffff',
-            userSelect: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>NEXT</span>
-            <span style={{ fontSize: '1.5em', transform: 'translateY(-15%)', display: 'inline-block' }}>▶</span>
-          </span>
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center"
+        style={{ height: '12vh' }}
+      >
+        {/* Result input and button background image */}
+        <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+          <Image
+            src="/Result input and button.png"
+            alt=""
+            width={810}
+            height={128}
+            style={{ width: 'clamp(320px, 58vw, 810px)', height: 'auto', display: 'block' }}
+          />
+          {/* Input overlaid on left portion */}
+          <input
+            className="game-input"
+            style={{
+              position: 'absolute',
+              left: '5%',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '55%',
+              height: '50%',
+              fontSize: 'clamp(10px, 1.2vw, 14px)',
+              background: 'rgba(10,10,60,0.0)',
+              border: 'none',
+              borderRadius: 8,
+              outline: 'none',
+              color: '#ffffff',
+              fontFamily: "'Press Start 2P', monospace",
+              textAlign: 'center',
+            }}
+            type="number"
+            min="0" max="1" step="0.01"
+            placeholder="FFR Value"
+            value={guess}
+            onChange={e => setGuess(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter' && guess) handleDone() }}
+          />
+          {/* DONE! button overlaid on right portion */}
+          <div
+            role="button"
+            onClick={handleDone}
+            style={{
+              position: 'absolute',
+              right: '4%',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '28%',
+              height: '55%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(10px, 1.2vw, 16px)',
+              color: '#ffffff',
+              userSelect: 'none',
+            }}
+          >
+            DONE!
+          </div>
         </div>
       </div>
 
@@ -300,11 +395,8 @@ export default function GamePage() {
       {showScore && (
         <div className="absolute inset-0 z-50 flex items-center justify-center">
           <div style={{ position: 'relative', width: 'clamp(340px, 55vw, 700px)' }}>
-            {/* Background rectangle */}
             <Image src="/RectangleGameScore.png" alt="" width={700} height={400}
               style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 16 }} />
-
-            {/* Content overlay */}
             <div style={{
               position: 'absolute', inset: 0,
               display: 'flex', flexDirection: 'column',
@@ -312,14 +404,9 @@ export default function GamePage() {
               padding: '5% 8% 7%',
               gap: '6%',
             }}>
-              {/* Game Score title */}
               <Image src="/GameScore.svg" alt="GAME SCORE" width={400} height={80}
                 style={{ width: '70%', height: 'auto', flexShrink: 0 }} />
-
-              {/* Two columns */}
               <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', flex: 1 }}>
-
-                {/* Doctor side */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16 }}>
                   <span style={{
                     fontFamily: "'Press Start 2P', monospace",
@@ -340,8 +427,6 @@ export default function GamePage() {
                     <span style={{ fontSize: 'clamp(18px, 2.5vw, 32px)' }}>⭐</span>
                   </div>
                 </div>
-
-                {/* AI side */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
                   <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={200} height={40}
                     style={{ width: 'clamp(100px, 18vw, 220px)', height: 'auto' }} />
@@ -354,6 +439,139 @@ export default function GamePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── ROUND RESULT POPUP ── */}
+      {showRoundResult && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.6)' }}>
+          <div style={{ position: 'relative', width: 'clamp(300px, 55vw, 810px)' }}>
+            <Image src="/Round Result.svg" alt="Round Result" width={810} height={338}
+              style={{ width: '100%', height: 'auto', display: 'block' }} />
+            {/* Three columns overlay */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              display: 'flex', flexDirection: 'row',
+              alignItems: 'center', justifyContent: 'space-around',
+              padding: '8% 5%',
+            }}>
+              {/* Doctor column */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <Image src="/DoctorGame.svg" alt="Doctor" width={48} height={48}
+                  style={{ width: 48, height: 48, borderRadius: 6, border: '2px solid #f8d20b' }} />
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(8px, 1vw, 12px)',
+                  color: '#fff',
+                }}>{playerName}</span>
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(18px, 3vw, 40px)',
+                  color: '#F2DF00',
+                  textShadow: '3px 3px 0 #000',
+                }}>{currentGuess || '—'}</span>
+              </div>
+
+              {/* Center column: real FFR */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(8px, 1vw, 12px)',
+                  color: '#fff',
+                }}>FFR result</span>
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(18px, 3vw, 40px)',
+                  color: '#ffffff',
+                  textShadow: '3px 3px 0 #000',
+                }}>0.85</span>
+              </div>
+
+              {/* Robot column */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                <Image src="/RobotGame.svg" alt="Robot" width={48} height={48}
+                  style={{ width: 48, height: 48, borderRadius: 6, border: '2px solid #00e5ff' }} />
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(8px, 1vw, 12px)',
+                  color: '#fff',
+                }}>AutocathFFR</span>
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(18px, 3vw, 40px)',
+                  color: '#F2DF00',
+                  textShadow: '3px 3px 0 #000',
+                }}>0.86</span>
+              </div>
+            </div>
+          </div>
+
+          {/* XP animations — shown 1s after round result */}
+          {showXP && (
+            <>
+              {/* Left XP */}
+              <div style={{
+                position: 'absolute',
+                left: '12vw',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                animation: 'xpFloat 2s ease-out forwards',
+              }}>
+                <Image src="/XP Doctor.svg" alt="XP Doctor" width={148} height={78}
+                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(16px, 2vw, 28px)',
+                  color: '#F2DF00',
+                  textShadow: '3px 3px 0 #000',
+                  marginTop: -8,
+                }}>+16</span>
+              </div>
+
+              {/* Right XP */}
+              <div style={{
+                position: 'absolute',
+                right: '12vw',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                animation: 'xpFloat 2s ease-out forwards',
+              }}>
+                <Image src="/XP Robot.svg" alt="XP Robot" width={148} height={78}
+                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+                <span style={{
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: 'clamp(16px, 2vw, 28px)',
+                  color: '#F2DF00',
+                  textShadow: '3px 3px 0 #000',
+                  marginTop: -8,
+                }}>+16</span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── NEXT ROUND OVERLAY ── */}
+      {showNextRound && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.5)', pointerEvents: 'none' }}>
+          <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Image src="/Next Round.svg" alt="Next Round" width={392} height={100}
+              style={{ width: 'clamp(240px, 30vw, 392px)', height: 'auto', display: 'block' }} />
+            <span style={{
+              position: 'absolute',
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(10px, 1.4vw, 18px)',
+              color: '#ffffff',
+              WebkitTextStroke: '1px #000',
+              textShadow: '2px 2px 0 #000',
+              lineHeight: 1,
+              pointerEvents: 'none',
+            }}>NEXT ROUND {round + 1}</span>
           </div>
         </div>
       )}
@@ -405,6 +623,10 @@ export default function GamePage() {
           20%  { transform: scale(1.0); opacity: 1; }
           75%  { transform: scale(1.0); opacity: 1; }
           100% { transform: scale(0.7); opacity: 0; }
+        }
+        @keyframes xpFloat {
+          0%   { transform: translateY(0); opacity: 1; }
+          100% { transform: translateY(-60px); opacity: 0; }
         }
       `}</style>
     </div>

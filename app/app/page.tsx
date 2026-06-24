@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [name, setName] = useState('')
   const [hospital, setHospital] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showTutorial, setShowTutorial] = useState(false)
   const router = useRouter()
 
   const handleStart = async () => {
@@ -86,7 +87,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Login Card + START button */}
+        {/* Login Card + START button + Tutorial button */}
         <div className="flex-shrink-0 flex flex-col items-center gap-4" style={{ width: 'clamp(300px, 28vw, 420px)' }}>
           <div
             className="w-full flex flex-col rounded-2xl p-5"
@@ -134,6 +135,23 @@ export default function LoginPage() {
           >
             {loading ? 'LOADING...' : 'START'}
           </div>
+
+          {/* Tutorial button */}
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => setShowTutorial(true)}
+            onKeyDown={e => e.key === 'Enter' && setShowTutorial(true)}
+            style={{ cursor: 'pointer', position: 'relative', zIndex: 20 }}
+          >
+            <Image
+              src="/Tutorial button.png"
+              alt="Tutorial"
+              width={220}
+              height={56}
+              style={{ width: 'clamp(160px, 18vw, 260px)', height: 'auto' }}
+            />
+          </div>
         </div>
 
         {/* Robot — animated sprite */}
@@ -157,6 +175,65 @@ export default function LoginPage() {
           className="object-contain"
         />
       </div>
+
+      {/* Tutorial Modal */}
+      {showTutorial && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.75)' }}
+          onClick={() => setShowTutorial(false)}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#0a0a3e',
+              border: '4px solid #3a3aae',
+              borderRadius: 16,
+              padding: '40px 36px 36px',
+              maxWidth: 520,
+              width: '90vw',
+              position: 'relative',
+              boxShadow: '0 8px 48px rgba(0,0,0,0.7)',
+            }}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setShowTutorial(false)}
+              style={{
+                position: 'absolute',
+                top: 12,
+                right: 16,
+                background: '#00cc44',
+                border: '3px solid #005c1e',
+                borderRadius: 8,
+                color: '#fff',
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: 16,
+                width: 36,
+                height: 36,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                lineHeight: 1,
+              }}
+            >
+              ×
+            </button>
+
+            <p style={{
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(9px, 1.1vw, 13px)',
+              color: '#F2DF00',
+              lineHeight: 2,
+              margin: 0,
+              textAlign: 'center',
+            }}>
+              Welcome to Man vs Machine! You will compete against AutocathFFR AI. An angiogram video and a frame will be shown. Enter your FFR value and press DONE! to submit. Try to beat the AI in 90 seconds!
+            </p>
+          </div>
+        </div>
+      )}
     </div>
     </>
   )
