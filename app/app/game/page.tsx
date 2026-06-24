@@ -154,7 +154,7 @@ export default function GamePage() {
         </div>
 
         {/* Center — timer + round badge */}
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-center gap-1" style={{ flex: 1, textAlign: 'center' }}>
           {/* Timer */}
           <div style={{ position: 'relative' }}>
             <Image src="/Timer.svg" alt="timer" width={326} height={88}
@@ -178,7 +178,7 @@ export default function GamePage() {
               alt=""
               width={160}
               height={36}
-              style={{ width: 'clamp(100px, 12vw, 180px)', height: 'auto', display: 'block' }}
+              style={{ width: 'clamp(160px, 20vw, 300px)', height: 'auto', display: 'block' }}
             />
             <span style={{
               position: 'absolute',
