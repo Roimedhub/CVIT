@@ -121,7 +121,7 @@ export default function LoginPage() {
             <img
               src="/Start button.svg"
               alt={loading ? 'LOADING...' : 'START'}
-              style={{ width: 'clamp(160px, 18vw, 240px)', height: 'auto', display: 'block' }}
+              style={{ width: 'clamp(120px, 13vw, 180px)', height: 'auto', display: 'block' }}
             />
           </div>
 
@@ -138,7 +138,7 @@ export default function LoginPage() {
               alt="Tutorial"
               width={220}
               height={56}
-              style={{ width: 'clamp(120px, 14vw, 190px)', height: 'auto' }}
+              style={{ width: 'clamp(90px, 10vw, 140px)', height: 'auto' }}
             />
           </div>
         </div>
