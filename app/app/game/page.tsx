@@ -13,7 +13,7 @@ export default function GamePage() {
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
-  const [roundBanner, setRoundBanner] = useState<number | null>(null)
+
   const [isPlaying, setIsPlaying] = useState(true)
   const [timeLeft, setTimeLeft] = useState(90)
   const [timerActive, setTimerActive] = useState(false)
@@ -42,24 +42,18 @@ export default function GamePage() {
 
   // Round 1: 3→2→1→GO! then start timer. Subsequent rounds: show "ROUND X" briefly.
   useEffect(() => {
-    if (round === 1) {
-      const sequence: (number | 'GO!' | null)[] = [3, 2, 1, 'GO!', null]
-      let i = 0
-      setCountdown(3)
-      const interval = setInterval(() => {
-        i++
-        const val = sequence[i] ?? null
-        setCountdown(val)
-        if (val === 'GO!') setTimerActive(true)
-        if (i >= sequence.length - 1) clearInterval(interval)
-      }, 900)
-      return () => clearInterval(interval)
-    } else {
-      setRoundBanner(round)
-      const t = setTimeout(() => setRoundBanner(null), 1500)
-      return () => clearTimeout(t)
-    }
-  }, [round])
+    const sequence: (number | 'GO!' | null)[] = [3, 2, 1, 'GO!', null]
+    let i = 0
+    setCountdown(3)
+    const interval = setInterval(() => {
+      i++
+      const val = sequence[i] ?? null
+      setCountdown(val)
+      if (val === 'GO!') setTimerActive(true)
+      if (i >= sequence.length - 1) clearInterval(interval)
+    }, 900)
+    return () => clearInterval(interval)
+  }, [])
 
   // 90-second game timer — only ticks when active
   useEffect(() => {
@@ -101,11 +95,10 @@ export default function GamePage() {
     if (!guess) return
     setCurrentGuess(guess)
     setGuess('')
+    setTimerActive(false)   // pause timer during transition
     setShowRoundResult(true)
 
-    setTimeout(() => {
-      setShowXP(true)
-    }, 1000)
+    setTimeout(() => setShowXP(true), 1000)
 
     setTimeout(() => {
       setShowXP(false)
@@ -116,7 +109,8 @@ export default function GamePage() {
     setTimeout(() => {
       setShowNextRound(false)
       setRound(r => r + 1)
-    }, 4500)
+      setTimerActive(true)  // resume timer
+    }, 6000)
   }
 
   return (
@@ -556,23 +550,6 @@ export default function GamePage() {
               lineHeight: 1,
               pointerEvents: 'none',
             }}>NEXT ROUND {round + 1}</span>
-          </div>
-        </div>
-      )}
-
-      {/* ── ROUND BANNER (between rounds) ── */}
-      {roundBanner !== null && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center"
-          style={{ background: 'rgba(10,10,50,0.65)', backdropFilter: 'blur(2px)', pointerEvents: 'none' }}>
-          <div key={roundBanner} style={{
-            fontFamily: "'Press Start 2P', monospace",
-            fontSize: 'clamp(40px, 8vw, 100px)',
-            color: '#ffffff',
-            textShadow: '6px 6px 0 #1a1a6e, -2px -2px 0 #3a3aae',
-            animation: 'countPop 1.5s ease-out forwards',
-            lineHeight: 1, textAlign: 'center',
-          }}>
-            ROUND {roundBanner}
           </div>
         </div>
       )}
