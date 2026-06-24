@@ -399,54 +399,54 @@ export default function GamePage() {
       {showRoundResult && (
         <div className="absolute inset-0 z-50 flex items-center justify-center"
           style={{ background: 'rgba(0,0,0,0.6)' }}>
-          <div style={{ position: 'relative', width: 'clamp(300px, 55vw, 810px)' }}>
-            <Image src="/Round Result.svg" alt="Round Result" width={810} height={338}
-              style={{ width: '100%', height: 'auto', display: 'block' }} />
-            {/* Three columns overlay — solid bg on each value covers SVG placeholder text */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              display: 'flex', flexDirection: 'row',
-              alignItems: 'center', justifyContent: 'space-around',
-              padding: '8% 5%',
-            }}>
-              {/* Doctor column */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>{playerName}</span>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(18px, 3vw, 40px)',
-                  color: '#F2DF00',
-                  textShadow: '3px 3px 0 #000',
-                  background: 'rgba(10,10,60,0.9)',
-                  padding: '2px 8px', borderRadius: 6,
-                }}>{currentGuess || '—'}</span>
-              </div>
+          {/* Custom result card — no SVG background, clean numbers only */}
+          <div style={{
+            background: '#3a3aaa',
+            border: '4px solid #6060cc',
+            borderRadius: 16,
+            padding: 'clamp(20px, 3vh, 40px) clamp(30px, 5vw, 80px)',
+            display: 'flex', flexDirection: 'row',
+            alignItems: 'center', justifyContent: 'center',
+            gap: 'clamp(30px, 6vw, 90px)',
+            boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+          }}>
+            {/* Doctor column */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 11px)', color: '#F2DF00' }}>{playerName}</span>
+              <span style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: 'clamp(28px, 4vw, 56px)',
+                color: '#F2DF00',
+                textShadow: '3px 3px 0 #000',
+              }}>{currentGuess || '—'}</span>
+            </div>
 
-              {/* Center column: real FFR */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>Real FFR</span>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(18px, 3vw, 40px)',
-                  color: '#ffffff',
-                  textShadow: '3px 3px 0 #000',
-                  background: 'rgba(10,10,60,0.9)',
-                  padding: '2px 8px', borderRadius: 6,
-                }}>0.85</span>
-              </div>
+            {/* Divider */}
+            <div style={{ width: 2, height: 'clamp(50px, 8vh, 80px)', background: '#6060cc' }} />
 
-              {/* Robot column */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 12px)', color: '#fff' }}>AutocathFFR</span>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(18px, 3vw, 40px)',
-                  color: '#F2DF00',
-                  textShadow: '3px 3px 0 #000',
-                  background: 'rgba(10,10,60,0.9)',
-                  padding: '2px 8px', borderRadius: 6,
-                }}>0.86</span>
-              </div>
+            {/* Center column: real FFR */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 11px)', color: '#fff' }}>Real FFR</span>
+              <span style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: 'clamp(28px, 4vw, 56px)',
+                color: '#ffffff',
+                textShadow: '3px 3px 0 #000',
+              }}>0.85</span>
+            </div>
+
+            {/* Divider */}
+            <div style={{ width: 2, height: 'clamp(50px, 8vh, 80px)', background: '#6060cc' }} />
+
+            {/* Robot column */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(8px, 1vw, 11px)', color: '#00e5ff' }}>AutocathFFR</span>
+              <span style={{
+                fontFamily: "'Press Start 2P', monospace",
+                fontSize: 'clamp(28px, 4vw, 56px)',
+                color: '#00e5ff',
+                textShadow: '3px 3px 0 #000',
+              }}>0.86</span>
             </div>
           </div>
 
