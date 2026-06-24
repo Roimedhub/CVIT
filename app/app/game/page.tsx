@@ -187,7 +187,7 @@ export default function GamePage() {
 
       {/* ── ROUND BADGE — sits just below header, centered ── */}
       <div style={{
-        position: 'absolute', top: '8vh', left: 0, right: 0, zIndex: 11,
+        position: 'absolute', top: '10vh', left: 0, right: 0, zIndex: 11,
         display: 'flex', justifyContent: 'center', pointerEvents: 'none',
       }}>
         <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
