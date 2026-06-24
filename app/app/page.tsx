@@ -104,10 +104,23 @@ export default function LoginPage() {
           </div>
 
           {/* START button — uses Start button.svg */}
+          <style>{`
+            @keyframes btnPress {
+              0%   { transform: scale(1); filter: brightness(1); }
+              30%  { transform: scale(0.88); filter: brightness(1.4); }
+              60%  { transform: scale(1.06); filter: brightness(0.9); }
+              100% { transform: scale(1); filter: brightness(1); }
+            }
+            .start-btn-press { animation: btnPress 0.35s ease-out; }
+          `}</style>
           <div
             role="button"
             tabIndex={0}
-            onClick={canStart ? handleStart : undefined}
+            onClick={canStart ? (e) => {
+              const el = e.currentTarget.querySelector('img')
+              if (el) { el.classList.remove('start-btn-press'); void el.offsetWidth; el.classList.add('start-btn-press') }
+              handleStart()
+            } : undefined}
             onKeyDown={e => e.key === 'Enter' && canStart && handleStart()}
             style={{
               cursor: canStart ? 'pointer' : 'default',
