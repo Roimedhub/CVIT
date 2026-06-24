@@ -497,8 +497,17 @@ export default function GamePage() {
         <div className="absolute inset-0 z-50 flex items-center justify-center"
           style={{ background: 'rgba(0,0,0,0.5)', pointerEvents: 'none' }}>
           <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Image src="/Next Round.svg" alt="Next Round" width={392} height={100}
-              style={{ width: 'clamp(240px, 30vw, 392px)', height: 'auto', display: 'block' }} />
+            <Image src="/Round x background.png" alt="" width={160} height={36}
+              style={{ width: 'clamp(260px, 34vw, 480px)', height: 'auto', display: 'block' }} />
+            <span style={{
+              position: 'absolute',
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: 'clamp(14px, 2vw, 26px)',
+              color: '#ffffff',
+              WebkitTextStroke: '1px #000',
+              textShadow: '2px 2px 0 #000',
+              lineHeight: 1,
+            }}>ROUND {round + 1}</span>
           </div>
         </div>
       )}
