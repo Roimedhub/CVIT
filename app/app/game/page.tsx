@@ -219,135 +219,122 @@ export default function GamePage() {
         </div>
       </div>
 
-      {/* ── MAIN AREA ── */}
-      <div
-        className="relative z-10 flex flex-1 min-h-0"
-        style={{ paddingBottom: '12vh' }}
-      >
-        {/* Left column: Doctor round + buzzer */}
-        <div
-          className="flex-shrink-0 flex flex-col items-center justify-between py-2"
-          style={{ width: '15vw' }}
-        >
-          <Image
-            src="/Doctor round.svg"
-            alt="Doctor"
-            width={200}
-            height={300}
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          />
-          <Image
-            src="/Doctor buzzer.svg"
-            alt="Doctor Buzzer"
-            width={120}
-            height={80}
-            style={{ width: '70%', height: 'auto', objectFit: 'contain' }}
-          />
-        </div>
+      {/* ── MAIN AREA + BOTTOM INPUT ── */}
+      <div className="relative z-10 flex flex-col flex-1 min-h-0 items-center"
+        style={{ paddingLeft: '16vw', paddingRight: '16vw', paddingBottom: '12vh', paddingTop: '1vh' }}>
 
-        {/* Center: video + frame in framing container */}
-        <div className="flex-1 flex items-center justify-center min-w-0 px-2">
-          <div style={{
-            display: 'flex', flexDirection: 'row',
-            alignItems: 'center', justifyContent: 'center',
-            gap: 12,
-            background: '#0d0d2e',
-            border: '3px solid #6E71FF',
-            borderRadius: 16,
-            padding: 10,
-            boxShadow: '0 0 24px rgba(110,113,255,0.4)',
-            maxHeight: '100%',
-          }}>
-            {/* Angiogram video */}
-            <div
-              onClick={togglePlay}
-              onWheel={handleScroll}
-              style={{
-                width: 'min(55vh, 33vw)', height: 'min(55vh, 33vw)',
-                flexShrink: 0,
-                border: '2px solid #3a3a9e', borderRadius: 8,
-                background: '#000', overflow: 'hidden',
-                cursor: 'pointer', position: 'relative',
-              }}
-            >
-              <video
-                ref={videoRef}
-                key={round}
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-              >
-                <source src="/round1_h264.mp4" type="video/mp4" />
-              </video>
-            </div>
-
-            {/* Game frame */}
-            <div style={{
-              width: 'min(55vh, 33vw)', height: 'min(55vh, 33vw)',
-              flexShrink: 0,
+        {/* Video + frame panel */}
+        <div style={{
+          display: 'flex', flexDirection: 'row',
+          alignItems: 'center', justifyContent: 'center',
+          gap: 12,
+          background: '#0d0d2e',
+          border: '4px solid #6E71FF',
+          borderRadius: 20,
+          padding: 10,
+          boxShadow: '0 0 32px rgba(110,113,255,0.5)',
+          flex: 1,
+          width: '100%',
+          minHeight: 0,
+        }}>
+          {/* Angiogram video */}
+          <div
+            onClick={togglePlay}
+            onWheel={handleScroll}
+            style={{
+              flex: 1, minWidth: 0,
+              aspectRatio: '1/1',
+              maxHeight: '100%',
               border: '2px solid #3a3a9e', borderRadius: 8,
-              background: '#0a0a2e', overflow: 'hidden',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Image src="/TestFrame.png" alt="Game frame" width={512} height={512}
-                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
-            </div>
+              background: '#000', overflow: 'hidden',
+              cursor: 'pointer', position: 'relative',
+            }}
+          >
+            <video
+              ref={videoRef}
+              key={round}
+              autoPlay loop muted playsInline
+              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+            >
+              <source src="/round1_h264.mp4" type="video/mp4" />
+            </video>
           </div>
-        </div>
 
-        {/* Right column: Robot round + buzzer */}
-        <div
-          className="flex-shrink-0 flex flex-col items-center justify-between py-2"
-          style={{ width: '15vw' }}
-        >
-          <Image
-            src="/Robot round.svg"
-            alt="Robot"
-            width={200}
-            height={300}
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          />
-          <Image
-            src="/Robot buzzer.svg"
-            alt="Robot Buzzer"
-            width={120}
-            height={80}
-            style={{ width: '70%', height: 'auto', objectFit: 'contain' }}
-          />
+          {/* Game frame */}
+          <div style={{
+            flex: 1, minWidth: 0,
+            aspectRatio: '1/1',
+            maxHeight: '100%',
+            border: '2px solid #3a3a9e', borderRadius: 8,
+            background: '#0a0a2e', overflow: 'hidden',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <Image src="/TestFrame.png" alt="Game frame" width={512} height={512}
+              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+          </div>
         </div>
       </div>
 
-      {/* ── BOTTOM INPUT BAR ── */}
+      {/* ── DOCTOR — absolutely positioned bottom-left ── */}
+      <div style={{
+        position: 'absolute', bottom: '10vh', left: 0, zIndex: 15,
+        width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
+        pointerEvents: 'none',
+      }}>
+        <Image src="/Doctor round.svg" alt="Doctor" width={300} height={420}
+          style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+      </div>
+      <div style={{
+        position: 'absolute', bottom: '1vh', left: '2vw', zIndex: 15,
+        width: '12vw', display: 'flex', justifyContent: 'center',
+        pointerEvents: 'none',
+      }}>
+        <Image src="/Doctor buzzer.svg" alt="Doctor Buzzer" width={120} height={80}
+          style={{ width: '80%', height: 'auto', objectFit: 'contain' }} />
+      </div>
+
+      {/* ── ROBOT — absolutely positioned bottom-right ── */}
+      <div style={{
+        position: 'absolute', bottom: '10vh', right: 0, zIndex: 15,
+        width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
+        pointerEvents: 'none',
+      }}>
+        <Image src="/Robot round.svg" alt="Robot" width={300} height={420}
+          style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+      </div>
+      <div style={{
+        position: 'absolute', bottom: '1vh', right: '2vw', zIndex: 15,
+        width: '12vw', display: 'flex', justifyContent: 'center',
+        pointerEvents: 'none',
+      }}>
+        <Image src="/Robot buzzer.svg" alt="Robot Buzzer" width={120} height={80}
+          style={{ width: '80%', height: 'auto', objectFit: 'contain' }} />
+      </div>
+
+      {/* ── BOTTOM INPUT BAR — Result input and button.svg ── */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-center"
+        className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center"
         style={{ height: '12vh' }}
       >
-        {/* Result input and button background image */}
+        {/* SVG is 531×105: left dark input area (x=16–257), right green DONE! button (x=280–530) */}
         <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
           <Image
-            src="/Result input and button.png"
+            src="/Result input and button.svg"
             alt=""
-            width={810}
-            height={128}
-            style={{ width: 'clamp(320px, 58vw, 810px)', height: 'auto', display: 'block' }}
+            width={531}
+            height={105}
+            style={{ width: 'clamp(280px, 42vw, 531px)', height: 'auto', display: 'block' }}
           />
-          {/* Input overlaid on left portion */}
+          {/* Input — overlaid over the left dark area (0–48% of width) */}
           <input
             className="game-input"
             style={{
               position: 'absolute',
-              left: '5%',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '55%',
-              height: '50%',
-              fontSize: 'clamp(10px, 1.2vw, 14px)',
-              background: 'rgba(10,10,60,0.0)',
-              border: 'none',
-              borderRadius: 8,
-              outline: 'none',
+              left: '3%', top: '50%', transform: 'translateY(-50%)',
+              width: '44%', height: '55%',
+              fontSize: 'clamp(10px, 1.3vw, 16px)',
+              background: 'transparent',
+              border: 'none', outline: 'none',
               color: '#ffffff',
               fontFamily: "'Press Start 2P', monospace",
               textAlign: 'center',
@@ -359,21 +346,18 @@ export default function GamePage() {
             onChange={e => setGuess(e.target.value)}
             onKeyDown={e => { if (e.key === 'Enter' && guess) handleDone() }}
           />
-          {/* DONE! button overlaid on right portion */}
+          {/* DONE! click area — overlaid over the right green button (52–98% of width) */}
           <div
             role="button"
             onClick={handleDone}
             style={{
               position: 'absolute',
-              right: '4%',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '28%',
-              height: '55%',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              left: '52%', top: '15%',
+              width: '46%', height: '70%',
               cursor: 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(10px, 1.2vw, 16px)',
+              fontSize: 'clamp(10px, 1.3vw, 16px)',
               color: '#ffffff',
               userSelect: 'none',
             }}

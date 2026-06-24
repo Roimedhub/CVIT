@@ -39,27 +39,6 @@ export default function LoginPage() {
 
   return (
     <>
-    <style>{`
-      #start-btn {
-        background-color: #00FF99 !important;
-        background-image: none !important;
-        color: #001a0d !important;
-        border: 4px solid #005c2e !important;
-        box-shadow: 0 5px 0 #005c2e !important;
-        border-radius: 10px !important;
-        padding: 14px 60px !important;
-        font-family: 'Press Start 2P', monospace !important;
-        font-size: clamp(12px, 1.4vw, 18px) !important;
-        cursor: pointer !important;
-        display: inline-block !important;
-        user-select: none !important;
-        position: relative !important;
-        z-index: 20 !important;
-      }
-      #start-btn:hover { background-color: #33FFAA !important; }
-      #start-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #005c2e !important; }
-      #start-btn.disabled { background-color: #00FF99 !important; cursor: default !important; }
-    `}</style>
     <div className="bg-m-pattern w-screen h-screen relative flex flex-col items-center overflow-hidden select-none">
       <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
@@ -124,19 +103,30 @@ export default function LoginPage() {
             </div>
           </div>
 
-          {/* START button */}
+          {/* START button — uses Start button.svg */}
           <div
-            id="start-btn"
             role="button"
             tabIndex={0}
             onClick={canStart ? handleStart : undefined}
             onKeyDown={e => e.key === 'Enter' && canStart && handleStart()}
-            className={!canStart ? 'disabled' : ''}
+            style={{
+              cursor: canStart ? 'pointer' : 'default',
+              opacity: canStart ? 1 : 0.6,
+              position: 'relative', zIndex: 20,
+              filter: canStart ? 'none' : 'grayscale(40%)',
+              transition: 'opacity 0.2s',
+            }}
           >
-            {loading ? 'LOADING...' : 'START'}
+            <Image
+              src="/Start button.svg"
+              alt={loading ? 'LOADING...' : 'START'}
+              width={336}
+              height={92}
+              style={{ width: 'clamp(200px, 26vw, 336px)', height: 'auto', display: 'block' }}
+            />
           </div>
 
-          {/* Tutorial button */}
+          {/* Tutorial button — smaller than START */}
           <div
             role="button"
             tabIndex={0}
@@ -149,7 +139,7 @@ export default function LoginPage() {
               alt="Tutorial"
               width={220}
               height={56}
-              style={{ width: 'clamp(160px, 18vw, 260px)', height: 'auto' }}
+              style={{ width: 'clamp(120px, 14vw, 190px)', height: 'auto' }}
             />
           </div>
         </div>
@@ -223,13 +213,32 @@ export default function LoginPage() {
 
             <p style={{
               fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(9px, 1.1vw, 13px)',
+              fontSize: 'clamp(9px, 1.0vw, 12px)',
               color: '#F2DF00',
+              lineHeight: 2.2,
+              margin: 0,
+              textAlign: 'center',
+            }}>
+              Welcome to Man vs Machine!{'\n'}
+              Compete against AutocathFFR AI.{'\n'}
+              An angiogram video and frame will be shown.{'\n'}
+              Enter your FFR value and press DONE!{'\n'}
+              Beat the AI in 90 seconds!
+            </p>
+            <hr style={{ border: '1px solid #3a3aae', margin: '20px 0' }} />
+            <p style={{
+              fontFamily: 'sans-serif',
+              fontSize: 'clamp(11px, 1.1vw, 14px)',
+              color: '#aab4ff',
               lineHeight: 2,
               margin: 0,
               textAlign: 'center',
             }}>
-              Welcome to Man vs Machine! You will compete against AutocathFFR AI. An angiogram video and a frame will be shown. Enter your FFR value and press DONE! to submit. Try to beat the AI in 90 seconds!
+              Man vs Machineへようこそ！<br />
+              AutocathFFR AIと競い合います。<br />
+              冠動脈造影動画とフレームが表示されます。<br />
+              FFR値を入力してDONE!を押して送信。<br />
+              90秒でAIを倒してみよう！
             </p>
           </div>
         </div>
