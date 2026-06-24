@@ -153,44 +153,16 @@ export default function GamePage() {
           </div>
         </div>
 
-        {/* Center — timer + round badge */}
-        <div className="flex flex-col items-center gap-1" style={{ flex: 1, textAlign: 'center' }}>
-          {/* Timer */}
-          <div style={{ position: 'relative' }}>
-            <Image src="/Timer.svg" alt="timer" width={326} height={88}
-              style={{ width: 'clamp(100px, 14vw, 200px)', height: 'auto', opacity: 0 }} />
-            <span style={{
-              position: 'absolute', inset: 0,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(20px, 2.8vw, 42px)',
-              color: timeLeft <= 10 ? '#ff4444' : '#F2DF00',
-              WebkitTextStroke: '2px #000',
-              textShadow: '3px 3px 0 #000',
-              lineHeight: 1,
-            }}>{formatTime(timeLeft)}</span>
-          </div>
-
-          {/* ROUND badge using Round x background.png */}
-          <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Image
-              src="/Round x background.png"
-              alt=""
-              width={160}
-              height={36}
-              style={{ width: 'clamp(160px, 20vw, 300px)', height: 'auto', display: 'block' }}
-            />
-            <span style={{
-              position: 'absolute',
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(9px, 1.2vw, 15px)',
-              color: '#ffffff',
-              WebkitTextStroke: '1px #000',
-              textShadow: '2px 2px 0 #000',
-              lineHeight: 1,
-              pointerEvents: 'none',
-            }}>ROUND {round}</span>
-          </div>
+        {/* Center — timer only (round badge is below header, absolute) */}
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: 'clamp(20px, 2.8vw, 42px)',
+            color: timeLeft <= 10 ? '#ff4444' : '#F2DF00',
+            WebkitTextStroke: '2px #000',
+            textShadow: '3px 3px 0 #000',
+            lineHeight: 1,
+          }}>{formatTime(timeLeft)}</span>
         </div>
 
         {/* AI side */}
@@ -210,6 +182,31 @@ export default function GamePage() {
               <span style={{ fontSize: 10, color: '#f8d20b' }}>0</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ── ROUND BADGE — sits just below header, centered ── */}
+      <div style={{
+        position: 'absolute', top: '13vh', left: 0, right: 0, zIndex: 11,
+        display: 'flex', justifyContent: 'center', pointerEvents: 'none',
+      }}>
+        <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Image
+            src="/Round x background.png"
+            alt=""
+            width={160}
+            height={36}
+            style={{ width: 'clamp(200px, 26vw, 380px)', height: 'clamp(28px, 3.5vh, 44px)', display: 'block' }}
+          />
+          <span style={{
+            position: 'absolute',
+            fontFamily: "'Press Start 2P', monospace",
+            fontSize: 'clamp(9px, 1.2vw, 15px)',
+            color: '#ffffff',
+            WebkitTextStroke: '1px #000',
+            textShadow: '2px 2px 0 #000',
+            lineHeight: 1,
+          }}>ROUND {round}</span>
         </div>
       </div>
 
