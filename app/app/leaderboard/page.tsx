@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
 
 type Player = {
@@ -13,6 +14,7 @@ type Player = {
 
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState<Player[]>([])
+  const router = useRouter()
 
   useEffect(() => {
     supabase
@@ -76,8 +78,8 @@ export default function LeaderboardPage() {
         </div>
       </div>
 
-      {/* ── RIGHT SIDE — AutocathFFR + video ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 gap-6 px-6">
+      {/* ── RIGHT SIDE — AutocathFFR + video + Play button ── */}
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 gap-6 px-6 pb-6">
 
         {/* AutocathFFR title */}
         <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={500} height={80}
@@ -91,6 +93,14 @@ export default function LeaderboardPage() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
           <span style={{ fontSize: 'clamp(8px, 1vw, 12px)', color: '#7878e0' }}>Engagement video</span>
+        </div>
+
+        {/* Play button — bottom right */}
+        <div style={{ width: '100%', maxWidth: 700, display: 'flex', justifyContent: 'flex-end' }}>
+          <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/Play-Leaderboard.svg" alt="Play" style={{ width: 'clamp(100px, 12vw, 180px)', height: 'auto', display: 'block' }} />
+          </div>
         </div>
       </div>
     </div>
