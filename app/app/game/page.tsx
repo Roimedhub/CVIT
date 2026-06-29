@@ -3,6 +3,26 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { supabase } from '../../lib/supabase'
+
+const STORAGE_URL = 'https://kdrweurtenixsvjcfxdi.supabase.co/storage/v1/object/public/game-rounds'
+
+type GameCase = {
+  case_name: string
+  invasive: number
+  autocath: number
+  video_file: string
+  frame_file: string
+}
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 export default function GamePage() {
   const router = useRouter()
@@ -23,7 +43,10 @@ export default function GamePage() {
   const [showXP, setShowXP] = useState(false)
   const [showNextRound, setShowNextRound] = useState(false)
   const [currentGuess, setCurrentGuess] = useState('')
+  const [cases, setCases] = useState<GameCase[]>([])
   const videoRef = useRef<HTMLVideoElement>(null)
+
+  const currentCase = cases[round - 1] ?? null
 
   // Navigate to game-score page when time is up
   useEffect(() => {
@@ -39,6 +62,16 @@ export default function GamePage() {
     if (name) setPlayerName(name)
     if (hospital) setPlayerHospital(hospital)
     if (id) setPlayerId(id)
+  }, [])
+
+  // Fetch and shuffle cases from Supabase once on mount
+  useEffect(() => {
+    supabase
+      .from('game_rounds')
+      .select('case_name, invasive, autocath, video_file, frame_file')
+      .then(({ data }) => {
+        if (data) setCases(shuffle(data as GameCase[]))
+      })
   }, [])
 
   // Round 1: 3→2→1→GO! then start timer. Subsequent rounds: show "ROUND X" briefly.
@@ -248,11 +281,11 @@ export default function GamePage() {
           >
             <video
               ref={videoRef}
-              key={round}
+              key={currentCase?.case_name}
               autoPlay loop muted playsInline
               style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
             >
-              <source src="/round1_h264.mp4" type="video/mp4" />
+              {currentCase && <source src={`${STORAGE_URL}/${currentCase.video_file}.mp4`} type="video/mp4" />}
             </video>
           </div>
 
@@ -265,8 +298,11 @@ export default function GamePage() {
             background: '#0a0a2e', overflow: 'hidden',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <Image src="/TestFrame.png" alt="Game frame" width={512} height={512}
-              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            {currentCase && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={`${STORAGE_URL}/${currentCase.frame_file}`} alt="Game frame"
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }} />
+            )}
           </div>
         </div>
       </div>
@@ -393,7 +429,7 @@ export default function GamePage() {
                     fontSize: 'clamp(22px, 3.5vw, 48px)',
                     color: '#ffffff',
                     textShadow: '3px 3px 0 #000',
-                  }}>0.85</span>
+                  }}>{currentCase?.invasive ?? '—'}</span>
                 </div>
               </div>
 
@@ -406,7 +442,7 @@ export default function GamePage() {
                   fontSize: 'clamp(22px, 3.5vw, 48px)',
                   color: '#00e5ff',
                   textShadow: '3px 3px 0 #000',
-                }}>0.86</span>
+                }}>{currentCase?.autocath ?? '—'}</span>
               </div>
 
             </div>
