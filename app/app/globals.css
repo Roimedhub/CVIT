@@ -72,6 +72,10 @@ button.btn-start:disabled {
   border-color: #6a6acf;
 }
 
+.game-input::placeholder {
+  font-size: clamp(6px, 0.7vw, 9px);
+}
+
 /* Doctor sprite animation — 18 frames, 440×760px each, displayed at 220×380px */
 .doctor-sprite {
   width: 220px;
