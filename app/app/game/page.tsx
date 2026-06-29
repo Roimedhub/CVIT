@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
@@ -35,7 +35,6 @@ export default function GamePage() {
   const [robotScore, setRobotScore] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
 
-  const [isPlaying, setIsPlaying] = useState(true)
   const [timeLeft, setTimeLeft] = useState(90)
   const [timerActive, setTimerActive] = useState(false)
   const [showScore, setShowScore] = useState(false)
@@ -44,18 +43,10 @@ export default function GamePage() {
   const [showNextRound, setShowNextRound] = useState(false)
   const [currentGuess, setCurrentGuess] = useState('')
   const [cases, setCases] = useState<GameCase[]>([])
-  const videoRef = useRef<HTMLVideoElement>(null)
 
   const currentCase = cases[round - 1] ?? null
 
   // Auto-play video whenever the case changes
-  useEffect(() => {
-    const v = videoRef.current
-    if (!v || !currentCase) return
-    v.load()
-    v.play().catch(() => {})
-  }, [currentCase])
-
   // Navigate to game-score page when time is up
   useEffect(() => {
     if (!showScore) return
@@ -116,22 +107,6 @@ export default function GamePage() {
   }, [timeLeft, timerActive])
 
   const formatTime = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
-
-  const togglePlay = () => {
-    const v = videoRef.current
-    if (!v) return
-    if (v.paused) { v.play(); setIsPlaying(true) }
-    else { v.pause(); setIsPlaying(false) }
-  }
-
-  const handleScroll = (e: React.WheelEvent) => {
-    const v = videoRef.current
-    if (!v || isPlaying) return
-    e.preventDefault()
-    const fps = 15
-    const step = 1 / fps
-    v.currentTime = Math.min(v.duration, Math.max(0, v.currentTime + (e.deltaY > 0 ? step : -step)))
-  }
 
   const handleDone = () => {
     if (!guess) return
@@ -274,28 +249,22 @@ export default function GamePage() {
           width: '100%',
           minHeight: 0,
         }}>
-          {/* Angiogram video */}
-          <div
-            onClick={togglePlay}
-            onWheel={handleScroll}
-            style={{
-              flex: 1, minWidth: 0,
-              aspectRatio: '1/1',
-              maxHeight: '100%',
-              border: '2px solid #3a3a9e', borderRadius: 8,
-              background: '#000', overflow: 'hidden',
-              cursor: 'pointer', position: 'relative',
-            }}
-          >
+          {/* Angiogram GIF */}
+          <div style={{
+            flex: 1, minWidth: 0,
+            aspectRatio: '1/1',
+            maxHeight: '100%',
+            border: '2px solid #3a3a9e', borderRadius: 8,
+            background: '#000', overflow: 'hidden',
+          }}>
             {currentCase && (
-              <video
-                ref={videoRef}
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
                 key={currentCase.case_name}
-                autoPlay loop muted playsInline
+                src={`${STORAGE_URL}/${currentCase.video_file}.gif`}
+                alt="Angiogram"
                 style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-              >
-                <source src={`${STORAGE_URL}/${currentCase.video_file}.mp4`} type="video/mp4" />
-              </video>
+              />
             )}
           </div>
 
