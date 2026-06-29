@@ -100,7 +100,6 @@ button.btn-start:disabled {
   background-position: 0 0;
   animation: robot-fight 1.2s steps(18) infinite;
   image-rendering: pixelated;
-  transform: scaleX(-1);
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
