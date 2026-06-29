@@ -117,27 +117,27 @@ export default function GamePage() {
     setShowDoctorBuzz(true)   // immediately show buzz
 
     setTimeout(() => {
-      setShowRoundResult(true) // round result after 4s
-    }, 4000)
+      setShowRoundResult(true) // round result after 2s
+    }, 2000)
 
     setTimeout(() => {
       setShowXP(true)
       setScore(s => s + 16)
       setRobotScore(s => s + 20)
-    }, 5000)
+    }, 3000)
 
     setTimeout(() => {
       setShowXP(false)
       setShowRoundResult(false)
       setShowNextRound(true)
-    }, 9000)
+    }, 7000)
 
     setTimeout(() => {
       setShowNextRound(false)
       setRound(r => r + 1)
       setTimerActive(true)
       setShowDoctorBuzz(false) // back to think
-    }, 12000)
+    }, 10000)
   }
 
   return (
@@ -294,7 +294,7 @@ export default function GamePage() {
 
       {/* ── DOCTOR — absolutely positioned bottom-left ── */}
       <div style={{
-        position: 'absolute', bottom: 0, left: 0, zIndex: 15,
+        position: 'absolute', bottom: 0, left: 0, zIndex: showDoctorBuzz ? 60 : 15,
         pointerEvents: 'none',
       }}>
         <div className={showDoctorBuzz ? 'doctor-buzz' : 'doctor-think'} />
