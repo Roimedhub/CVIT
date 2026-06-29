@@ -72,6 +72,25 @@ button.btn-start:disabled {
   border-color: #6a6acf;
 }
 
+/* Doctor sprite animation — 11 frames, 720×760px each, displayed at 360×380px */
+.doctor-sprite {
+  width: 360px;
+  height: 380px;
+  background-image: url('/doctor_ready_to_fight.png');
+  background-size: 3960px 380px; /* 11 × 360px */
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: doctor-fight 0.9s steps(11) infinite;
+  image-rendering: pixelated;
+  transform: scaleX(-1);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+
+@keyframes doctor-fight {
+  from { background-position: 0 0; }
+  to   { background-position: -3960px 0; }
+}
+
 /* Robot sprite animation — 14 frames, 400×760px each */
 .robot-sprite {
   width: 210px;
