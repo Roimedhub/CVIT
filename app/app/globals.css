@@ -72,15 +72,15 @@ button.btn-start:disabled {
   border-color: #6a6acf;
 }
 
-/* Doctor sprite animation — 22 frames, 360×760px each, displayed at 180×380px */
+/* Doctor sprite animation — 18 frames, 440×760px each, displayed at 220×380px */
 .doctor-sprite {
-  width: 180px;
+  width: 220px;
   height: 380px;
   background-image: url('/doctor_ready_to_fight.png');
-  background-size: 3960px 380px; /* 22 × 180px */
+  background-size: 3960px 380px; /* 18 × 220px */
   background-repeat: no-repeat;
   background-position: 0 0;
-  animation: doctor-fight 1.2s steps(22) infinite;
+  animation: doctor-fight 1.2s steps(18) infinite;
   image-rendering: pixelated;
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
