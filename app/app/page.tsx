@@ -54,7 +54,7 @@ export default function LoginPage() {
         style={{ paddingBottom: '18vh' }}
       >
         {/* Doctor — sprite animation */}
-        <div className="flex-1 flex items-center justify-center" style={{ maxWidth: 400 }}>
+        <div className="flex items-center justify-center" style={{ width: '22vw', minWidth: 180, maxWidth: 300 }}>
           <div className="doctor-sprite" />
         </div>
 
@@ -162,7 +162,7 @@ export default function LoginPage() {
         </div>
 
         {/* Robot — animated sprite */}
-        <div className="flex-1 flex items-center justify-center" style={{ maxWidth: 340 }}>
+        <div className="flex items-center justify-center" style={{ width: '22vw', minWidth: 180, maxWidth: 300 }}>
           <div className="robot-sprite" />
         </div>
       </div>
