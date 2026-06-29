@@ -282,7 +282,7 @@ export default function GamePage() {
             <video
               ref={videoRef}
               key={currentCase?.case_name}
-              src={currentCase ? `${STORAGE_URL}/${currentCase.video_file}` : undefined}
+              src={currentCase ? `${STORAGE_URL}/${currentCase.video_file}.mp4` : undefined}
               autoPlay loop muted playsInline
               style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
             />
