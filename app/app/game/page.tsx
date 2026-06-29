@@ -287,13 +287,16 @@ export default function GamePage() {
               cursor: 'pointer', position: 'relative',
             }}
           >
-            <video
-              ref={videoRef}
-              key={currentCase?.case_name}
-              src={currentCase ? `${STORAGE_URL}/${currentCase.video_file}.mp4` : undefined}
-              autoPlay loop muted playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-            />
+            {currentCase && (
+              <video
+                ref={videoRef}
+                key={currentCase.case_name}
+                autoPlay loop muted playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+              >
+                <source src={`${STORAGE_URL}/${currentCase.video_file}.mp4`} type="video/mp4" />
+              </video>
+            )}
           </div>
 
           {/* Game frame */}
