@@ -53,18 +53,20 @@ export default function LoginPage() {
         className="flex-1 flex items-center justify-center w-full relative z-10 px-4"
         style={{ paddingBottom: '18vh' }}
       >
-        {/* Doctor */}
+        {/* Doctor — sprite animation */}
         <div className="flex-1 flex items-center justify-center" style={{ maxWidth: 340 }}>
-          <Image
-            src="/doctor_ready_to_fight.png"
-            alt="Doctor"
-            width={300}
-            height={450}
-            className="object-contain drop-shadow-2xl"
-            style={{ imageRendering: 'pixelated', maxHeight: '55vh', transform: 'scaleX(-1)' }}
-            priority
-          />
-        </div>
+          <div style={{
+            width: 'clamp(140px, 18vw, 280px)',
+            height: 'clamp(135px, 17.3vw, 269px)',
+            backgroundImage: 'url(/doctor_ready_to_fight.png)',
+            backgroundSize: '1100% 100%',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: '0 0',
+            imageRendering: 'pixelated',
+            transform: 'scaleX(-1)',
+            animation: 'doctorFight 0.9s steps(11) infinite',
+            filter: 'drop-shadow(0 8px 16px rgba(0,0,0,0.5))',
+          }} /></div>
 
         {/* Login Card + START button + Tutorial button */}
         <div className="flex-shrink-0 flex flex-col items-center gap-4" style={{ width: 'clamp(300px, 28vw, 420px)' }}>
@@ -105,6 +107,10 @@ export default function LoginPage() {
 
           {/* START button — uses Start button.svg */}
           <style>{`
+            @keyframes doctorFight {
+              from { background-position: 0 0; }
+              to   { background-position: -7920px 0; }
+            }
             @keyframes btnPress {
               0%   { transform: scale(1); filter: brightness(1); }
               30%  { transform: scale(0.88); filter: brightness(1.4); }
