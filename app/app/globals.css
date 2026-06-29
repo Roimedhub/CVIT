@@ -82,7 +82,6 @@ button.btn-start:disabled {
   background-position: 0 0;
   animation: doctor-fight 0.9s steps(11) infinite;
   image-rendering: pixelated;
-  transform: scaleX(-1);
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
