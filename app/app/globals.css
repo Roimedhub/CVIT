@@ -128,6 +128,23 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
+/* Game round — robot buzz: 18 frames, plays once for 2s, stays on first frame */
+.robot-buzz {
+  width: 220px;
+  height: 380px;
+  background-image: url('/robot_buzz.png');
+  background-size: 3960px 380px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: robot-buzz 2s steps(18) 1;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+@keyframes robot-buzz {
+  from { background-position: 0 0; }
+  to   { background-position: -3960px 0; }
+}
+
 /* Game round — robot think: 18 frames, 440×760px, displayed at 220×380px */
 .robot-think {
   width: 220px;

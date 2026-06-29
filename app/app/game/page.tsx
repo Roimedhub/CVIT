@@ -44,6 +44,7 @@ export default function GamePage() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [cases, setCases] = useState<GameCase[]>([])
   const [showDoctorBuzz, setShowDoctorBuzz] = useState(false)
+  const [showRobotBuzz, setShowRobotBuzz] = useState(false)
 
   const currentCase = cases[round - 1] ?? null
 
@@ -88,6 +89,14 @@ export default function GamePage() {
     }, 900)
     return () => clearInterval(interval)
   }, [])
+
+  // Robot buzz: random trigger 5–15s after each round starts
+  useEffect(() => {
+    setShowRobotBuzz(false)
+    const delay = 5000 + Math.random() * 10000
+    const t = setTimeout(() => setShowRobotBuzz(true), delay)
+    return () => clearTimeout(t)
+  }, [round])
 
   // 90-second game timer — only ticks when active
   useEffect(() => {
@@ -136,7 +145,8 @@ export default function GamePage() {
       setShowNextRound(false)
       setRound(r => r + 1)
       setTimerActive(true)
-      setShowDoctorBuzz(false) // back to think
+      setShowDoctorBuzz(false)
+      setShowRobotBuzz(false)
     }, 10000)
   }
 
@@ -305,7 +315,7 @@ export default function GamePage() {
         position: 'absolute', bottom: 0, right: 0, zIndex: 15,
         pointerEvents: 'none',
       }}>
-        <div className="robot-think" />
+        <div className={showRobotBuzz ? 'robot-buzz' : 'robot-think'} />
       </div>
 
       {/* ── BOTTOM INPUT BAR — Result input and button.svg ── */}
