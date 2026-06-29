@@ -56,7 +56,7 @@ export default function LoginPage() {
         {/* Doctor */}
         <div className="flex-1 flex items-center justify-center" style={{ maxWidth: 340 }}>
           <Image
-            src="/doctor.png"
+            src="/doctor_ready_to_fight.png"
             alt="Doctor"
             width={300}
             height={450}
