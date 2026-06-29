@@ -48,6 +48,14 @@ export default function GamePage() {
 
   const currentCase = cases[round - 1] ?? null
 
+  // Auto-play video whenever the case changes
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v || !currentCase) return
+    v.load()
+    v.play().catch(() => {})
+  }, [currentCase])
+
   // Navigate to game-score page when time is up
   useEffect(() => {
     if (!showScore) return
