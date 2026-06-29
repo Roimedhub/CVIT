@@ -43,6 +43,7 @@ export default function GamePage() {
   const [showNextRound, setShowNextRound] = useState(false)
   const [currentGuess, setCurrentGuess] = useState('')
   const [cases, setCases] = useState<GameCase[]>([])
+  const [showDoctorBuzz, setShowDoctorBuzz] = useState(false)
 
   const currentCase = cases[round - 1] ?? null
 
@@ -112,26 +113,31 @@ export default function GamePage() {
     if (!guess) return
     setCurrentGuess(guess)
     setGuess('')
-    setTimerActive(false)   // pause timer during transition
-    setShowRoundResult(true)
+    setTimerActive(false)
+    setShowDoctorBuzz(true)   // immediately show buzz
+
+    setTimeout(() => {
+      setShowRoundResult(true) // round result after 4s
+    }, 4000)
 
     setTimeout(() => {
       setShowXP(true)
       setScore(s => s + 16)
       setRobotScore(s => s + 20)
-    }, 1000)
+    }, 5000)
 
     setTimeout(() => {
       setShowXP(false)
       setShowRoundResult(false)
       setShowNextRound(true)
-    }, 5000)
+    }, 9000)
 
     setTimeout(() => {
       setShowNextRound(false)
       setRound(r => r + 1)
-      setTimerActive(true)  // resume timer
-    }, 8000)
+      setTimerActive(true)
+      setShowDoctorBuzz(false) // back to think
+    }, 12000)
   }
 
   return (
@@ -291,7 +297,7 @@ export default function GamePage() {
         position: 'absolute', bottom: 0, left: 0, zIndex: 15,
         pointerEvents: 'none',
       }}>
-        <div className={showRoundResult || showXP || showNextRound ? 'doctor-buzz' : 'doctor-think'} />
+        <div className={showDoctorBuzz ? 'doctor-buzz' : 'doctor-think'} />
       </div>
 
       {/* ── ROBOT — absolutely positioned bottom-right ── */}
