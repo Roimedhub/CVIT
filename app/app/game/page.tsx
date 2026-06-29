@@ -285,7 +285,7 @@ export default function GamePage() {
               autoPlay loop muted playsInline
               style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
             >
-              {currentCase && <source src={`${STORAGE_URL}/${currentCase.video_file}.mp4`} type="video/mp4" />}
+              {currentCase && <source src={`${STORAGE_URL}/${currentCase.video_file}`} type="video/mp4" />}
             </video>
           </div>
 
