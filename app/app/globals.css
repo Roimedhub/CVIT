@@ -94,6 +94,23 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
+/* Game round — doctor buzz: 18 frames, 440×760px, displayed at 220×380px */
+.doctor-buzz {
+  width: 220px;
+  height: 380px;
+  background-image: url('/doctor_buzz.png');
+  background-size: 3960px 380px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: doctor-buzz 1.4s steps(18) infinite;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+@keyframes doctor-buzz {
+  from { background-position: 0 0; }
+  to   { background-position: -3960px 0; }
+}
+
 /* Game round — doctor think: 18 frames, 440×760px, displayed at 220×380px */
 .doctor-think {
   width: 220px;

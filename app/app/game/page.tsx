@@ -291,7 +291,7 @@ export default function GamePage() {
         position: 'absolute', bottom: 0, left: 0, zIndex: 15,
         pointerEvents: 'none',
       }}>
-        <div className="doctor-think" />
+        <div className={showRoundResult || showXP || showNextRound ? 'doctor-buzz' : 'doctor-think'} />
       </div>
 
       {/* ── ROBOT — absolutely positioned bottom-right ── */}
