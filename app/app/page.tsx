@@ -163,9 +163,7 @@ export default function LoginPage() {
 
         {/* Robot — animated sprite */}
         <div className="flex-1 flex items-center justify-center" style={{ maxWidth: 340 }}>
-          <div style={{ overflow: 'hidden', width: 220, height: 400, clipPath: 'inset(0 0 0 6px)' }}>
-            <div className="robot-sprite drop-shadow-2xl" />
-          </div>
+          <div className="robot-sprite" />
         </div>
       </div>
 

@@ -90,22 +90,23 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
-/* Robot sprite animation — 14 frames, 400×760px each */
+/* Robot sprite animation — 18 frames, 440×760px each, displayed at 220×380px */
 .robot-sprite {
-  width: 210px;
-  height: 400px;
-  background-image: url('/robot_sprite.png');
-  background-size: 2940px 400px; /* 14 × 210px width, scaled height */
+  width: 220px;
+  height: 380px;
+  background-image: url('/robot_ready_to_fight.png');
+  background-size: 3960px 380px; /* 18 × 220px */
   background-repeat: no-repeat;
   background-position: 0 0;
-  animation: robot-walk 1.1s steps(14) infinite;
+  animation: robot-fight 1.2s steps(18) infinite;
   image-rendering: pixelated;
   transform: scaleX(-1);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-@keyframes robot-walk {
+@keyframes robot-fight {
   from { background-position: 0 0; }
-  to   { background-position: -2940px 0; }
+  to   { background-position: -3960px 0; }
 }
 
 /* Floor — platform stage look */
