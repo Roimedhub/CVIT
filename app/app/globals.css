@@ -115,9 +115,8 @@ button.btn-start:disabled {
   background-size: 3960px 380px;
   background-repeat: no-repeat;
   background-position: 0 0;
-  animation: robot-think 1.4s steps(33) infinite;
+  animation: robot-think 2.8s steps(33) infinite;
   image-rendering: pixelated;
-  transform: scaleX(-1);
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 @keyframes robot-think {
