@@ -90,6 +90,41 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
+/* Game round — doctor think: 18 frames, 440×760px, displayed at 220×380px */
+.doctor-think {
+  width: 220px;
+  height: 380px;
+  background-image: url('/doctor_think.png');
+  background-size: 3960px 380px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: doctor-think 1.4s steps(18) infinite;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+@keyframes doctor-think {
+  from { background-position: 0 0; }
+  to   { background-position: -3960px 0; }
+}
+
+/* Game round — robot think: 33 frames, 240×760px, displayed at 120×380px */
+.robot-think {
+  width: 120px;
+  height: 380px;
+  background-image: url('/robot_think.png');
+  background-size: 3960px 380px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: robot-think 1.4s steps(33) infinite;
+  image-rendering: pixelated;
+  transform: scaleX(-1);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+@keyframes robot-think {
+  from { background-position: 0 0; }
+  to   { background-position: -3960px 0; }
+}
+
 /* Robot sprite animation — 18 frames, 440×760px each, displayed at 220×380px */
 .robot-sprite {
   width: 220px;

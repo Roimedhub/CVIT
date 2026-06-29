@@ -289,21 +289,17 @@ export default function GamePage() {
       {/* ── DOCTOR — absolutely positioned bottom-left ── */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, zIndex: 15,
-        width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
         pointerEvents: 'none',
       }}>
-        <Image src="/Doctor round.svg" alt="Doctor" width={300} height={420}
-          style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+        <div className="doctor-think" />
       </div>
 
       {/* ── ROBOT — absolutely positioned bottom-right ── */}
       <div style={{
         position: 'absolute', bottom: 0, right: 0, zIndex: 15,
-        width: '17vw', display: 'flex', flexDirection: 'column', alignItems: 'center',
         pointerEvents: 'none',
       }}>
-        <Image src="/Robot round.svg" alt="Robot" width={300} height={420}
-          style={{ width: '100%', height: 'auto', objectFit: 'contain' }} />
+        <div className="robot-think" />
       </div>
 
       {/* ── BOTTOM INPUT BAR — Result input and button.svg ── */}
