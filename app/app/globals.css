@@ -145,6 +145,18 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
+/* Game round — doctor waiting: static first frame shown after doctor_buzz */
+.doctor-waiting {
+  width: 220px;
+  height: 380px;
+  background-image: url('/doctor_waiting.png');
+  background-size: 3960px 380px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+
 /* Game round — robot waiting: first frame of sprite sheet, static */
 .robot-waiting {
   width: 220px;

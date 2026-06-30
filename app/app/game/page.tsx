@@ -44,6 +44,7 @@ export default function GamePage() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [cases, setCases] = useState<GameCase[]>([])
   const [showDoctorBuzz, setShowDoctorBuzz] = useState(false)
+  const [showDoctorWaiting, setShowDoctorWaiting] = useState(false)
   const [showRobotBuzz, setShowRobotBuzz] = useState(false)
   const [showRobotWaiting, setShowRobotWaiting] = useState(false)
 
@@ -95,6 +96,7 @@ export default function GamePage() {
   useEffect(() => {
     setShowRobotBuzz(false)
     setShowRobotWaiting(false)
+    setShowDoctorWaiting(false)
     const delay = 5000 + Math.random() * 10000
     const t1 = setTimeout(() => {
       setShowRobotBuzz(true)
@@ -128,20 +130,35 @@ export default function GamePage() {
   const formatTime = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
 
   const handleDone = () => {
-    if (!guess) return
+    if (!guess || !currentCase) return
+    const guessVal = parseFloat(guess)
     setCurrentGuess(guess)
     setGuess('')
     setTimerActive(false)
-    setShowDoctorBuzz(true)   // immediately show buzz
+    setShowDoctorBuzz(true)
+
+    // ── Scoring (max 50 per round) ──
+    const doctorError = Math.abs(guessVal - currentCase.invasive)
+    const robotError  = Math.abs(currentCase.autocath - currentCase.invasive)
+    const accuracyPts = Math.max(0, Math.round(30 - doctorError * 200))
+    const speedBonus  = !showRobotBuzz ? 10 : 0   // submitted before robot buzzed
+    const doctorWins  = doctorError <= robotError
+    const closerBonus = doctorWins ? 10 : 0
+    const roundPts    = accuracyPts + speedBonus + closerBonus   // max 50
+
+    const robotAccuracy  = Math.max(0, Math.round(30 - robotError * 200))
+    const robotRoundPts  = robotAccuracy + (doctorWins ? 0 : 10) // max 40
 
     setTimeout(() => {
-      setShowRoundResult(true) // round result after 2s
+      setShowDoctorBuzz(false)
+      setShowDoctorWaiting(true)
+      setShowRoundResult(true)
     }, 2000)
 
     setTimeout(() => {
       setShowXP(true)
-      setScore(s => s + 16)
-      setRobotScore(s => s + 20)
+      setScore(s => s + roundPts)
+      setRobotScore(s => s + robotRoundPts)
     }, 3000)
 
     setTimeout(() => {
@@ -154,7 +171,7 @@ export default function GamePage() {
       setShowNextRound(false)
       setRound(r => r + 1)
       setTimerActive(true)
-      setShowDoctorBuzz(false)
+      setShowDoctorWaiting(false)
       setShowRobotBuzz(false)
       setShowRobotWaiting(false)
     }, 10000)
@@ -317,7 +334,7 @@ export default function GamePage() {
         position: 'absolute', bottom: 0, left: 0, zIndex: showDoctorBuzz ? 60 : 15,
         pointerEvents: 'none',
       }}>
-        <div className={showDoctorBuzz ? 'doctor-buzz' : 'doctor-think'} />
+        <div className={showDoctorWaiting ? 'doctor-waiting' : showDoctorBuzz ? 'doctor-buzz' : 'doctor-think'} />
       </div>
 
       {/* ── ROBOT — absolutely positioned bottom-right ── */}
