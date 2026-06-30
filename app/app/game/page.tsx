@@ -200,8 +200,8 @@ export default function GamePage() {
           </div>
         </div>
 
-        {/* Center — timer only (round badge is below header, absolute) */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* Center — timer absolutely centered in header */}
+        <div style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
           <span style={{
             fontFamily: "'Press Start 2P', monospace",
             fontSize: 'clamp(14px, 1.8vw, 28px)',
