@@ -37,15 +37,9 @@ export default function LeaderboardPage() {
       <div className="relative z-10 flex flex-col"
         style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
 
-        {/* Leaderboard icon */}
+        {/* Leaderboard title animation */}
         <div style={{ flexShrink: 0, paddingBottom: '1vh' }}>
-          <Image
-            src="/leaderboard.png"
-            alt="Leaderboard"
-            width={300}
-            height={80}
-            style={{ width: 'clamp(140px, 22vw, 300px)', height: 'auto', display: 'block' }}
-          />
+          <div className="leaderboard-anim" />
         </div>
 
         {/* Real player list — rendered below the clipped header graphic */}

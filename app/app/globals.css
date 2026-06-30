@@ -192,6 +192,22 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
+/* Leaderboard title animation — 15 frames, 546×260px each */
+.leaderboard-anim {
+  width: 546px;
+  height: 260px;
+  background-image: url('/leaderboard.png');
+  background-size: 8190px 260px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  animation: leaderboard-anim 1.2s steps(15) infinite;
+  image-rendering: pixelated;
+}
+@keyframes leaderboard-anim {
+  from { background-position: 0 0; }
+  to   { background-position: -8190px 0; }
+}
+
 /* Floor — platform stage look */
 .floor-gradient {
   background: linear-gradient(180deg, #5555d0 0%, #3a3ab8 40%, #2a2aa8 100%);
