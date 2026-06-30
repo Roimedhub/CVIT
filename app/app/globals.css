@@ -145,12 +145,12 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
-/* Game round — robot waiting: static image shown after robot_buzz completes */
+/* Game round — robot waiting: first frame of sprite sheet, static */
 .robot-waiting {
   width: 220px;
   height: 380px;
   background-image: url('/robot_waiting.png');
-  background-size: contain;
+  background-size: 3960px 380px;
   background-repeat: no-repeat;
   background-position: 0 0;
   image-rendering: pixelated;
