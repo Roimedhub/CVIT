@@ -204,10 +204,10 @@ export default function GamePage() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <span style={{
             fontFamily: "'Press Start 2P', monospace",
-            fontSize: 'clamp(20px, 2.8vw, 42px)',
+            fontSize: 'clamp(14px, 1.8vw, 28px)',
             color: timeLeft <= 10 ? '#ff4444' : '#F2DF00',
-            WebkitTextStroke: '2px #000',
-            textShadow: '3px 3px 0 #000',
+            WebkitTextStroke: '1px #000',
+            textShadow: '2px 2px 0 #000',
             lineHeight: 1,
           }}>{formatTime(timeLeft)}</span>
         </div>
