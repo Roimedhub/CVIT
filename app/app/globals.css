@@ -115,7 +115,7 @@ button.btn-start:disabled {
 .doctor-think {
   width: 220px;
   height: 380px;
-  background-image: url('/doctor_think.png');
+  background-image: url('/doctor_think_new.png');
   background-size: 3960px 380px;
   background-repeat: no-repeat;
   background-position: 0 0;
@@ -149,7 +149,7 @@ button.btn-start:disabled {
 .robot-think {
   width: 220px;
   height: 380px;
-  background-image: url('/robot_think.png');
+  background-image: url('/robot_think_new.png');
   background-size: 3960px 380px;
   background-repeat: no-repeat;
   background-position: 0 0;
