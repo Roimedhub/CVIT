@@ -37,17 +37,14 @@ export default function LeaderboardPage() {
       <div className="relative z-10 flex flex-col"
         style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
 
-        {/* Clip SVG to show only the title banner + doctor frame.
-            Content width ≈ 28vw (32vw sidebar minus 2vw padding each side).
-            List rows start at y=665/1745 = 36.7% → 28 × 1.952 × 0.367 ≈ 20vw.
-            Use 18vw to stay safely above the first row. */}
-        <div style={{ position: 'relative', width: '100%', height: '15vw', overflow: 'hidden', flexShrink: 0 }}>
+        {/* Leaderboard icon */}
+        <div style={{ flexShrink: 0, paddingBottom: '1vh' }}>
           <Image
-            src="/Leaderboard_Overview.svg"
+            src="/leaderboard.png"
             alt="Leaderboard"
-            width={894}
-            height={1745}
-            style={{ width: '100%', height: 'auto', display: 'block', position: 'absolute', top: 0, left: 0 }}
+            width={300}
+            height={80}
+            style={{ width: 'clamp(140px, 22vw, 300px)', height: 'auto', display: 'block' }}
           />
         </div>
 
