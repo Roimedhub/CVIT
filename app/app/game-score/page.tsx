@@ -38,10 +38,9 @@ export default function GameScorePage() {
       {/* Center row: DOCTOR | card | ROBOT */}
       <div className="relative z-10 flex flex-row items-center justify-center w-full" style={{ maxWidth: '98vw' }}>
 
-        {/* DOCTOR character */}
+        {/* DOCTOR character — animated */}
         <div style={{ flexShrink: 0 }}>
-          <img src="/DOCTOR game score.svg" alt="Doctor"
-            style={{ width: 'clamp(120px, 18vw, 260px)', height: 'auto', display: 'block' }} />
+          <div className="doctor-score" />
         </div>
 
         {/* Card — smaller rectangle */}
@@ -62,7 +61,7 @@ export default function GameScorePage() {
               style={{ width: '70%', height: 'auto', flexShrink: 0 }} />
 
             {/* Two-column grid — rows align: name | autocathFFR, hospital | medhubai, score | score */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto 1fr', width: '100%', flex: 1, gap: '6px 4%', alignItems: 'center' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto auto', width: '100%', flex: 1, gap: '6px 4%', alignItems: 'center', alignContent: 'center' }}>
 
               {/* Row 1: doctor name | AutocathFFR */}
               <span style={{
@@ -98,17 +97,16 @@ export default function GameScorePage() {
 
               {/* Row 3: doctor score | robot score */}
               <img src="/doctor result game score.svg" alt="Doctor result"
-                style={{ width: '85%', height: 'auto', alignSelf: 'end' }} />
+                style={{ width: '85%', height: 'auto' }} />
               <img src="/robot result game score.svg" alt="Robot result"
-                style={{ width: '85%', height: 'auto', alignSelf: 'end', justifySelf: 'end' }} />
+                style={{ width: '85%', height: 'auto', justifySelf: 'end' }} />
             </div>
           </div>
         </div>
 
-        {/* ROBOT character */}
+        {/* ROBOT character — animated */}
         <div style={{ flexShrink: 0 }}>
-          <img src="/ROBOT game score.svg" alt="Robot"
-            style={{ width: 'clamp(120px, 18vw, 260px)', height: 'auto', display: 'block' }} />
+          <div className="robot-score" />
         </div>
       </div>
     </div>
