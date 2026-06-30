@@ -85,15 +85,21 @@ export default function LeaderboardPage() {
         <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={500} height={80}
           style={{ width: 'clamp(200px, 35vw, 500px)', height: 'auto' }} />
 
-        {/* Engagement video placeholder */}
-        <div style={{
-          width: '100%', maxWidth: 700, aspectRatio: '16/9',
-          border: '4px solid #7878e0', borderRadius: 16,
-          background: '#0a0a2e',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <span style={{ fontSize: 'clamp(8px, 1vw, 12px)', color: '#7878e0' }}>Engagement video</span>
-        </div>
+        {/* Engagement video */}
+        <video
+          src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video.mp4`}
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            width: '100%', maxWidth: 700, aspectRatio: '16/9',
+            border: '4px solid #7878e0', borderRadius: 16,
+            background: '#0a0a2e',
+            display: 'block',
+            objectFit: 'cover',
+          }}
+        />
 
         {/* Play button — bottom center */}
         <div style={{ width: '100%', maxWidth: 700, display: 'flex', justifyContent: 'center' }}>
