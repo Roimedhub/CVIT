@@ -192,15 +192,15 @@ button.btn-start:disabled {
   to   { background-position: -3960px 0; }
 }
 
-/* Leaderboard title animation — 15 frames, 546×260px each */
+/* Leaderboard title animation — 14 frames, 585×260px each */
 .leaderboard-anim {
-  width: 546px;
+  width: 585px;
   height: 260px;
   background-image: url('/leaderboard.png');
   background-size: 8190px 260px;
   background-repeat: no-repeat;
   background-position: 0 0;
-  animation: leaderboard-anim 1.2s steps(15) infinite;
+  animation: leaderboard-anim 1.2s steps(14) infinite;
   image-rendering: pixelated;
 }
 @keyframes leaderboard-anim {
