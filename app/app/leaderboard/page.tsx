@@ -97,7 +97,7 @@ export default function LeaderboardPage() {
             />
 
             {/* Play button — inside box, near bottom */}
-            <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer', marginBottom: '2%' }}>
+            <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer', marginTop: 20 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/Play-Leaderboard.svg" alt="Play"
                 style={{ width: 'clamp(100px, 10vw, 160px)', height: 'auto', display: 'block' }} />
