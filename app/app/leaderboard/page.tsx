@@ -72,9 +72,6 @@ export default function LeaderboardPage() {
       {/* ── RIGHT SIDE — AutocathFFR + video + Play button ── */}
       <div className="relative z-10 flex flex-col items-center justify-center flex-1 gap-6 px-6 pb-6">
 
-        {/* AutocathFFR title */}
-        <Image src="/AutocathFFR.svg" alt="AutocathFFR" width={500} height={80}
-          style={{ width: 'clamp(200px, 35vw, 500px)', height: 'auto' }} />
 
         {/* Engagement video */}
         <video
