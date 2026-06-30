@@ -38,11 +38,11 @@ export default function LeaderboardPage() {
         style={{ width: '95vw', height: '90vh', gap: '1vw' }}>
 
         {/* ── LEFT PANEL — leaderboard list ── */}
-        <div style={{ position: 'relative', width: '30vw', minWidth: 240, maxWidth: 380, flexShrink: 0 }}>
-          {/* SVG background */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/Rectang leleaderboard left side.svg" alt=""
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill' }} />
+        <div style={{
+          position: 'relative', width: '30vw', minWidth: 240, maxWidth: 380, flexShrink: 0,
+          backgroundImage: "url('/Rectang leleaderboard left side.svg')",
+          backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat',
+        }}>
 
           {/* Content over background */}
           <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', padding: '4% 6%' }}>
@@ -67,11 +67,11 @@ export default function LeaderboardPage() {
         </div>
 
         {/* ── RIGHT PANEL — video + play button ── */}
-        <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
-          {/* SVG background */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/Rectangleleaderboard right side - video.svg" alt=""
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill' }} />
+        <div style={{
+          position: 'relative', flex: 1, minWidth: 0,
+          backgroundImage: "url('/Rectangleleaderboard right side - video.svg')",
+          backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat',
+        }}>
 
           {/* Content over background */}
           <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', padding: '6% 8% 4%' }}>
