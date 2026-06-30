@@ -25,7 +25,7 @@ export default function GameScorePage() {
   return (
     <div
       className="w-screen h-screen relative flex flex-col items-center justify-center overflow-hidden select-none"
-      style={{ fontFamily: "'Press Start 2P', monospace" }}
+      style={{ fontFamily: "'Pixelify Sans', sans-serif" }}
     >
       <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
@@ -61,38 +61,46 @@ export default function GameScorePage() {
             <img src="/game score title.svg" alt="Game Score"
               style={{ width: '70%', height: 'auto', flexShrink: 0 }} />
 
-            {/* Two-column row */}
-            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', gap: '4%', flex: 1 }}>
+            {/* Two-column grid — rows align: name | autocathFFR, hospital | medhubai, score | score */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'auto auto 1fr', width: '100%', flex: 1, gap: '6px 4%', alignItems: 'center' }}>
 
-              {/* Left: real doctor name/hospital + score SVG */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(7px, 1vw, 13px)',
-                  color: '#F2DF00',
-                  WebkitTextStroke: '1px #000',
-                  textShadow: '1px 1px 0 #000',
-                  wordBreak: 'break-all',
-                }}>{playerName}</span>
-                <span style={{
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontSize: 'clamp(6px, 0.8vw, 11px)',
-                  color: '#F2DF00',
-                  WebkitTextStroke: '1px #000',
-                  textShadow: '1px 1px 0 #000',
-                  wordBreak: 'break-all',
-                }}>{playerHospital}</span>
-                <img src="/doctor result game score.svg" alt="Doctor result"
-                  style={{ width: '85%', height: 'auto', marginTop: '8%' }} />
-              </div>
+              {/* Row 1: doctor name | AutocathFFR */}
+              <span style={{
+                fontFamily: "'Pixelify Sans', sans-serif",
+                fontSize: 'clamp(10px, 1.4vw, 18px)',
+                color: '#F2DF00',
+                textShadow: '1px 1px 0 #000',
+                wordBreak: 'break-word',
+              }}>{playerName}</span>
+              <span style={{
+                fontFamily: "'Pixelify Sans', sans-serif",
+                fontSize: 'clamp(10px, 1.4vw, 18px)',
+                color: '#00e5ff',
+                textShadow: '1px 1px 0 #000',
+                textAlign: 'right',
+              }}>AutocathFFR</span>
 
-              {/* Right: autocathFFR/MedHubAI + robot score */}
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-                <img src="/autocathFFR - MedHubai game score.svg" alt="AutocathFFR"
-                  style={{ width: '90%', height: 'auto' }} />
-                <img src="/robot result game score.svg" alt="Robot result"
-                  style={{ width: '85%', height: 'auto', marginTop: '8%' }} />
-              </div>
+              {/* Row 2: hospital | MedHub.AI */}
+              <span style={{
+                fontFamily: "'Pixelify Sans', sans-serif",
+                fontSize: 'clamp(8px, 1.1vw, 15px)',
+                color: '#F2DF00',
+                textShadow: '1px 1px 0 #000',
+                wordBreak: 'break-word',
+              }}>{playerHospital}</span>
+              <span style={{
+                fontFamily: "'Pixelify Sans', sans-serif",
+                fontSize: 'clamp(8px, 1.1vw, 15px)',
+                color: '#00e5ff',
+                textShadow: '1px 1px 0 #000',
+                textAlign: 'right',
+              }}>MedHub.AI</span>
+
+              {/* Row 3: doctor score | robot score */}
+              <img src="/doctor result game score.svg" alt="Doctor result"
+                style={{ width: '85%', height: 'auto', alignSelf: 'end' }} />
+              <img src="/robot result game score.svg" alt="Robot result"
+                style={{ width: '85%', height: 'auto', alignSelf: 'end', justifySelf: 'end' }} />
             </div>
           </div>
         </div>
