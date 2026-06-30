@@ -78,7 +78,7 @@ export default function LeaderboardPage() {
 
             {/* Engagement video — constrained inside the box */}
             <video
-              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video.mp4`}
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video_new_new.mp4`}
               autoPlay
               loop
               muted
