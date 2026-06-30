@@ -90,7 +90,7 @@ export default function LeaderboardPage() {
           muted
           playsInline
           style={{
-            width: '100%', maxWidth: 700, aspectRatio: '16/9',
+            width: '100%', maxWidth: 700, aspectRatio: '1920/1262',
             border: '4px solid #7878e0', borderRadius: 16,
             background: '#0a0a2e',
             display: 'block',
