@@ -21,81 +21,86 @@ export default function LeaderboardPage() {
       .from('cvit_players')
       .select('id, name, hospital, xp')
       .order('xp', { ascending: false })
-      .limit(10)
+      .limit(11)
       .then(({ data }) => { if (data) setPlayers(data) })
   }, [])
 
   return (
     <div
-      className="w-screen h-screen relative flex overflow-hidden select-none"
+      className="w-screen h-screen relative flex items-center justify-center overflow-hidden select-none"
       style={{ fontFamily: "'Press Start 2P', monospace" }}
     >
       {/* Background */}
       <Image src="/m_background.svg" alt="" fill style={{ objectFit: 'cover', zIndex: 0 }} priority />
 
-      {/* ── LEFT SIDEBAR — Leaderboard ── */}
-      <div className="relative z-10 flex flex-col"
-        style={{ width: '32vw', minWidth: 260, maxWidth: 420, padding: '1.5vh 2vw', flexShrink: 0 }}>
+      {/* ── MAIN LAYOUT — two panels side by side ── */}
+      <div className="relative z-10 flex flex-row items-stretch justify-center"
+        style={{ width: '95vw', height: '90vh', gap: '1vw' }}>
 
-        {/* Leaderboard title animation */}
-        <div style={{ flexShrink: 0, paddingBottom: '1vh' }}>
-          <div className="leaderboard-anim" />
-        </div>
+        {/* ── LEFT PANEL — leaderboard list ── */}
+        <div style={{ position: 'relative', width: '30vw', minWidth: 240, maxWidth: 380, flexShrink: 0 }}>
+          {/* SVG background */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/Rectang leleaderboard left side.svg" alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill' }} />
 
-        {/* Real player list — rendered below the clipped header graphic */}
-        <div style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          gap: 'clamp(4px, 0.9vh, 10px)',
-          paddingTop: 'clamp(4px, 1vh, 12px)',
-          paddingLeft: '2%',
-          paddingRight: '2%',
-        }}>
-          {players.map((p, i) => (
-            <div key={p.id} style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              background: 'rgba(10,10,60,0.45)',
-              borderRadius: 6,
-              padding: '2px 8px',
-            }}>
-              <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
-                {i + 1}. {p.name}
-              </span>
-              <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
+          {/* Content over background */}
+          <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', padding: '4% 6%' }}>
+
+            {/* Leaderboard title animation */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%' }}>
+              <div className="leaderboard-anim" />
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* ── RIGHT SIDE — AutocathFFR + video + Play button ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 gap-6 px-6 pb-6">
-
-
-        {/* Engagement video */}
-        <video
-          src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video.mp4`}
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            width: '100%', maxWidth: 700, aspectRatio: '1920/1262',
-            border: '4px solid #7878e0', borderRadius: 16,
-            background: '#0a0a2e',
-            display: 'block',
-            objectFit: 'cover',
-          }}
-        />
-
-        {/* Play button — bottom center */}
-        <div style={{ width: '100%', maxWidth: 700, display: 'flex', justifyContent: 'center' }}>
-          <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/Play-Leaderboard.svg" alt="Play" style={{ width: 'clamp(100px, 12vw, 180px)', height: 'auto', display: 'block' }} />
+            {/* Player list */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 'clamp(4px, 1vh, 12px)', overflowY: 'auto' }}>
+              {players.map((p, i) => (
+                <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 4px' }}>
+                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
+                    {i + 1}. {p.name}
+                  </span>
+                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* ── RIGHT PANEL — video + play button ── */}
+        <div style={{ position: 'relative', flex: 1, minWidth: 0 }}>
+          {/* SVG background */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/Rectangleleaderboard right side - video.svg" alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill' }} />
+
+          {/* Content over background */}
+          <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4% 6%', gap: '4%' }}>
+
+            {/* Engagement video */}
+            <video
+              src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video.mp4`}
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{
+                width: '100%',
+                aspectRatio: '1920/1262',
+                borderRadius: 12,
+                display: 'block',
+                objectFit: 'cover',
+              }}
+            />
+
+            {/* Play button */}
+            <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/Play-Leaderboard.svg" alt="Play"
+                style={{ width: 'clamp(100px, 10vw, 160px)', height: 'auto', display: 'block' }} />
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )
