@@ -74,9 +74,9 @@ export default function LeaderboardPage() {
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'fill' }} />
 
           {/* Content over background */}
-          <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '4% 6%', gap: '4%' }}>
+          <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', padding: '6% 8% 4%' }}>
 
-            {/* Engagement video */}
+            {/* Engagement video — constrained inside the box */}
             <video
               src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video.mp4`}
               autoPlay
@@ -84,7 +84,8 @@ export default function LeaderboardPage() {
               muted
               playsInline
               style={{
-                width: '100%',
+                width: '85%',
+                maxHeight: '78%',
                 aspectRatio: '1920/1262',
                 borderRadius: 12,
                 display: 'block',
@@ -92,8 +93,8 @@ export default function LeaderboardPage() {
               }}
             />
 
-            {/* Play button */}
-            <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+            {/* Play button — inside box, near bottom */}
+            <div role="button" onClick={() => router.push('/')} style={{ cursor: 'pointer', marginBottom: '2%' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/Play-Leaderboard.svg" alt="Play"
                 style={{ width: 'clamp(100px, 10vw, 160px)', height: 'auto', display: 'block' }} />
