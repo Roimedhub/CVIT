@@ -136,7 +136,7 @@ button.btn-start:disabled {
   background-size: 3960px 380px;
   background-repeat: no-repeat;
   background-position: 0 0;
-  animation: robot-buzz 2s steps(18) 1;
+  animation: robot-buzz 2s steps(18) 1 forwards;
   image-rendering: pixelated;
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
