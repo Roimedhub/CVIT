@@ -40,8 +40,9 @@ export default function LeaderboardPage() {
         {/* ── LEFT PANEL — leaderboard list ── */}
         <div style={{
           position: 'relative', width: '30vw', minWidth: 240, maxWidth: 380, flexShrink: 0,
-          backgroundImage: "url('/Rectang%20leleaderboard%20left%20side.svg')",
-          backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat',
+          background: '#4143AF',
+          boxShadow: '0 0 54px rgba(25,26,70,1)',
+          borderRadius: 8,
         }}>
 
           {/* Content over background */}
@@ -69,8 +70,9 @@ export default function LeaderboardPage() {
         {/* ── RIGHT PANEL — video + play button ── */}
         <div style={{
           position: 'relative', flex: 1, minWidth: 0,
-          backgroundImage: "url('/Rectangleleaderboard%20right%20side%20-%20video.svg')",
-          backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat',
+          background: '#4143AF',
+          boxShadow: '0 0 48px rgba(0,0,0,0.65)',
+          borderRadius: 8,
         }}>
 
           {/* Content over background */}
