@@ -12,6 +12,8 @@ export default function LoginPage() {
   const [showTutorial, setShowTutorial] = useState(false)
   const [showAdmin, setShowAdmin] = useState(false)
   const [adminMsg, setAdminMsg] = useState('')
+  const [preloadMsg, setPreloadMsg] = useState('')
+  const [preloading, setPreloading] = useState(false)
   const router = useRouter()
 
   const handleStart = async () => {
@@ -238,6 +240,58 @@ export default function LoginPage() {
             {adminMsg && (
               <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 10, color: adminMsg.startsWith('✓') ? '#00ff88' : '#ff4444' }}>
                 {adminMsg}
+              </span>
+            )}
+
+            <button
+              disabled={preloading}
+              onClick={async () => {
+                setPreloading(true)
+                setPreloadMsg('Loading cases...')
+                try {
+                  const STORAGE_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds`
+                  const { createClient } = await import('@supabase/supabase-js')
+                  const sb = createClient(
+                    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+                    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+                  )
+                  const { data } = await sb.from('game_rounds').select('video_file, frame_file')
+                  if (!data) { setPreloadMsg('✗ Failed to fetch cases'); setPreloading(false); return }
+
+                  let done = 0
+                  const total = data.length * 2
+                  const load = (url: string) => new Promise<void>(resolve => {
+                    // Try as image first (frames), fall back to fetch (GIFs/videos)
+                    const img = new window.Image()
+                    img.onload = img.onerror = () => { done++; setPreloadMsg(`Loading... ${done}/${total}`); resolve() }
+                    img.src = url
+                  })
+
+                  await Promise.all(data.flatMap(c => [
+                    load(`${STORAGE_URL}/${c.video_file}.gif`),
+                    load(`${STORAGE_URL}/${c.frame_file}`),
+                  ]))
+                  setPreloadMsg(`✓ All ${data.length} cases preloaded!`)
+                } catch {
+                  setPreloadMsg('✗ Error during preload')
+                } finally {
+                  setPreloading(false)
+                }
+              }}
+              style={{
+                background: preloading ? '#444' : '#0055cc',
+                border: '3px solid #003388',
+                borderRadius: 10, color: '#fff', cursor: preloading ? 'default' : 'pointer',
+                fontFamily: "'Press Start 2P', monospace", fontSize: 11,
+                padding: '14px 24px', width: '100%',
+              }}
+            >
+              {preloading ? 'LOADING...' : 'PRELOAD ALL CASES'}
+            </button>
+
+            {preloadMsg && (
+              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 10, color: preloadMsg.startsWith('✓') ? '#00ff88' : preloadMsg.startsWith('✗') ? '#ff4444' : '#aaaaff' }}>
+                {preloadMsg}
               </span>
             )}
           </div>
