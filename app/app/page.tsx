@@ -10,10 +10,16 @@ export default function LoginPage() {
   const [hospital, setHospital] = useState('')
   const [loading, setLoading] = useState(false)
   const [showTutorial, setShowTutorial] = useState(false)
+  const [showAdmin, setShowAdmin] = useState(false)
+  const [adminMsg, setAdminMsg] = useState('')
   const router = useRouter()
 
   const handleStart = async () => {
     if (!name.trim() || !hospital.trim()) return
+    if (name.trim() === 'Admin' && hospital.trim() === 'Admin') {
+      setShowAdmin(true)
+      return
+    }
     setLoading(true)
     try {
       const res = await fetch('/api/players', {
@@ -180,6 +186,63 @@ export default function LoginPage() {
           className="object-contain"
         />
       </div>
+
+      {/* Admin Modal */}
+      {showAdmin && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.75)' }}
+          onClick={() => { setShowAdmin(false); setAdminMsg('') }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#0a0a3e', border: '4px solid #ff4444',
+              borderRadius: 16, padding: '36px 32px',
+              maxWidth: 420, width: '90vw', position: 'relative',
+              boxShadow: '0 8px 48px rgba(0,0,0,0.7)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
+            }}
+          >
+            <button onClick={() => { setShowAdmin(false); setAdminMsg('') }}
+              style={{
+                position: 'absolute', top: 12, right: 16,
+                background: '#cc0000', border: '3px solid #5c0000',
+                borderRadius: 8, color: '#fff',
+                fontFamily: "'Press Start 2P', monospace", fontSize: 16,
+                width: 36, height: 36, cursor: 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>×</button>
+
+            <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 14, color: '#ff4444' }}>
+              ADMIN PANEL
+            </span>
+
+            <button
+              onClick={async () => {
+                setAdminMsg('Resetting...')
+                const res = await fetch('/api/players', { method: 'DELETE' })
+                const data = await res.json()
+                setAdminMsg(data.success ? '✓ Leaderboard reset!' : '✗ Error resetting')
+              }}
+              style={{
+                background: '#cc0000', border: '3px solid #5c0000',
+                borderRadius: 10, color: '#fff', cursor: 'pointer',
+                fontFamily: "'Press Start 2P', monospace", fontSize: 11,
+                padding: '14px 24px', width: '100%',
+              }}
+            >
+              RESET LEADERBOARD
+            </button>
+
+            {adminMsg && (
+              <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 10, color: adminMsg.startsWith('✓') ? '#00ff88' : '#ff4444' }}>
+                {adminMsg}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Tutorial Modal */}
       {showTutorial && (

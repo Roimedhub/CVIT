@@ -22,6 +22,20 @@ export async function POST(req: NextRequest) {
   return NextResponse.json(data)
 }
 
+export async function DELETE() {
+  const { error } = await supabase
+    .from('cvit_players')
+    .delete()
+    .neq('id', '00000000-0000-0000-0000-000000000000') // delete all rows
+
+  if (error) {
+    console.error('Supabase error:', error)
+    return NextResponse.json({ error: 'Failed to reset leaderboard' }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}
+
 export async function PATCH(req: NextRequest) {
   const { id, xp } = await req.json()
 

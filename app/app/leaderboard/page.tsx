@@ -12,8 +12,12 @@ type Player = {
   xp: number
 }
 
+const PAGE_SIZE = 15
+const PAGE_INTERVAL = 5000 // ms per page
+
 export default function LeaderboardPage() {
   const [players, setPlayers] = useState<Player[]>([])
+  const [page, setPage] = useState(0)
   const router = useRouter()
 
   useEffect(() => {
@@ -21,9 +25,19 @@ export default function LeaderboardPage() {
       .from('cvit_players')
       .select('id, name, hospital, xp')
       .order('xp', { ascending: false })
-      .limit(11)
+      .limit(100)
       .then(({ data }) => { if (data) setPlayers(data) })
   }, [])
+
+  // Cycle pages every PAGE_INTERVAL ms
+  useEffect(() => {
+    if (players.length <= PAGE_SIZE) return
+    const totalPages = Math.ceil(players.length / PAGE_SIZE)
+    const t = setInterval(() => setPage(p => (p + 1) % totalPages), PAGE_INTERVAL)
+    return () => clearInterval(t)
+  }, [players.length])
+
+  const visiblePlayers = players.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE)
 
   return (
     <div
@@ -55,10 +69,10 @@ export default function LeaderboardPage() {
 
             {/* Player list */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 'clamp(4px, 1vh, 12px)', overflowY: 'auto' }}>
-              {players.map((p, i) => (
+              {visiblePlayers.map((p, i) => (
                 <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 4px' }}>
                   <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
-                    {i + 1}. {p.name}
+                    {page * PAGE_SIZE + i + 1}. {p.name}
                   </span>
                   <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
                 </div>
