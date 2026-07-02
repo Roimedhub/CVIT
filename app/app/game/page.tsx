@@ -203,20 +203,20 @@ export default function GamePage() {
         />
 
         {/* Doctor side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <div style={{
-            width: 56, height: 56, border: '3px solid #f8d20b',
+            width: 72, height: 72, border: '3px solid #f8d20b',
             borderRadius: 6, overflow: 'hidden', flexShrink: 0,
             background: '#1a1a6e',
           }}>
-            <Image src="/DoctorGame.svg" alt="Doctor" width={56} height={56}
+            <Image src="/DoctorGame.svg" alt="Doctor" width={72} height={72}
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-white" style={{ fontSize: 10 }}>{playerName}</span>
+            <span className="text-white" style={{ fontSize: 13 }}>{playerName}</span>
             <div className="flex items-center gap-1">
-              <span style={{ fontSize: 10, color: '#f8d20b' }}>{score}</span>
-              <span style={{ fontSize: 12 }}>⭐</span>
+              <span style={{ fontSize: 13, color: '#f8d20b' }}>{score}</span>
+              <span style={{ fontSize: 16 }}>⭐</span>
             </div>
           </div>
         </div>
@@ -234,20 +234,20 @@ export default function GamePage() {
         </div>
 
         {/* AI side */}
-        <div className="flex items-center gap-2 flex-row-reverse">
+        <div className="flex items-center gap-3 flex-row-reverse">
           <div style={{
-            width: 56, height: 56, border: '3px solid #00e5ff',
+            width: 72, height: 72, border: '3px solid #00e5ff',
             borderRadius: 6, overflow: 'hidden', flexShrink: 0,
             background: '#1a1a6e',
           }}>
-            <Image src="/RobotGame.svg" alt="AI" width={56} height={56}
+            <Image src="/RobotGame.svg" alt="AI" width={72} height={72}
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="text-white" style={{ fontSize: 10 }}>AutocathFFR</span>
+            <span className="text-white" style={{ fontSize: 13 }}>AutocathFFR</span>
             <div className="flex items-center gap-1">
-              <span style={{ fontSize: 12 }}>⭐</span>
-              <span style={{ fontSize: 10, color: '#f8d20b' }}>{robotScore}</span>
+              <span style={{ fontSize: 16 }}>⭐</span>
+              <span style={{ fontSize: 13, color: '#f8d20b' }}>{robotScore}</span>
             </div>
           </div>
         </div>
