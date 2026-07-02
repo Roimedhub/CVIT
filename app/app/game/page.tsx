@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
@@ -49,6 +49,7 @@ export default function GamePage() {
   const [lastRobotPts, setLastRobotPts] = useState(0)
   const [showRobotBuzz, setShowRobotBuzz] = useState(false)
   const [showRobotWaiting, setShowRobotWaiting] = useState(false)
+  const robotBuzzTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const currentCase = cases[round - 1] ?? null
 
@@ -108,6 +109,7 @@ export default function GamePage() {
       }, 2000)
       return () => clearTimeout(t2)
     }, delay)
+    robotBuzzTimeoutRef.current = t1
     return () => clearTimeout(t1)
   }, [round])
 
@@ -138,6 +140,13 @@ export default function GamePage() {
     setGuess('')
     setTimerActive(false)
     setShowDoctorBuzz(true)
+
+    // Cancel pending robot buzz and freeze robot in waiting pose
+    if (robotBuzzTimeoutRef.current) {
+      clearTimeout(robotBuzzTimeoutRef.current)
+      robotBuzzTimeoutRef.current = null
+    }
+    if (!showRobotBuzz) setShowRobotWaiting(true)
 
     // ── Scoring (max 50 per round) ──
     const doctorError = Math.abs(guessVal - currentCase.invasive)
