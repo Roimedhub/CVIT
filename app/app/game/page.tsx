@@ -58,6 +58,7 @@ export default function GamePage() {
   useEffect(() => {
     if (!showScore) return
     sessionStorage.setItem('finalScore', String(score))
+      sessionStorage.setItem('robotFinalScore', String(robotScore))
     router.push('/game-score')
   }, [showScore, router, score])
 

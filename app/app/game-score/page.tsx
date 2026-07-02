@@ -9,14 +9,17 @@ export default function GameScorePage() {
   const [playerName, setPlayerName] = useState('Doctor name')
   const [playerHospital, setPlayerHospital] = useState('Organization')
   const [score, setScore] = useState(0)
+  const [robotScore, setRobotScore] = useState(0)
 
   useEffect(() => {
     const name = sessionStorage.getItem('playerName')
     const hospital = sessionStorage.getItem('playerHospital')
     const xp = sessionStorage.getItem('finalScore')
+    const rxp = sessionStorage.getItem('robotFinalScore')
     if (name) setPlayerName(name)
     if (hospital) setPlayerHospital(hospital)
     if (xp) setScore(Number(xp))
+    if (rxp) setRobotScore(Number(rxp))
 
     const t = setTimeout(() => router.push('/leaderboard'), 7000)
     return () => clearTimeout(t)
@@ -64,7 +67,7 @@ export default function GameScorePage() {
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', flex: 1, alignItems: 'center', justifyContent: 'space-around', gap: '4%' }}>
 
               {/* LEFT — Doctor */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4, flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, flex: 1, paddingLeft: '8%' }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
                   fontSize: 'clamp(13px, 1.8vw, 24px)',
@@ -79,12 +82,19 @@ export default function GameScorePage() {
                   textShadow: '1px 1px 0 #000',
                   wordBreak: 'break-word',
                 }}>{playerHospital}</span>
-                <img src="/doctor result game score.svg" alt="Doctor result"
-                  style={{ width: '90%', height: 'auto', marginTop: 8 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                  <span style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: 'clamp(22px, 3vw, 42px)',
+                    color: '#fff',
+                    textShadow: '2px 2px 0 #000',
+                  }}>{score}</span>
+                  <span style={{ fontSize: 'clamp(28px, 3.5vw, 48px)' }}>⭐</span>
+                </div>
               </div>
 
               {/* RIGHT — Robot */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4, flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, flex: 1, paddingLeft: '8%' }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
                   fontSize: 'clamp(13px, 1.8vw, 24px)',
@@ -97,8 +107,15 @@ export default function GameScorePage() {
                   color: '#00e5ff',
                   textShadow: '1px 1px 0 #000',
                 }}>MedHub.AI</span>
-                <img src="/robot result game score.svg" alt="Robot result"
-                  style={{ width: '90%', height: 'auto', marginTop: 8 }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                  <span style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: 'clamp(22px, 3vw, 42px)',
+                    color: '#fff',
+                    textShadow: '2px 2px 0 #000',
+                  }}>{robotScore}</span>
+                  <span style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', filter: 'hue-rotate(160deg)' }}>⭐</span>
+                </div>
               </div>
             </div>
           </div>
