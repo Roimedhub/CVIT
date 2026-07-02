@@ -45,6 +45,8 @@ export default function GamePage() {
   const [cases, setCases] = useState<GameCase[]>([])
   const [showDoctorBuzz, setShowDoctorBuzz] = useState(false)
   const [showDoctorWaiting, setShowDoctorWaiting] = useState(false)
+  const [lastDoctorPts, setLastDoctorPts] = useState(0)
+  const [lastRobotPts, setLastRobotPts] = useState(0)
   const [showRobotBuzz, setShowRobotBuzz] = useState(false)
   const [showRobotWaiting, setShowRobotWaiting] = useState(false)
 
@@ -157,6 +159,8 @@ export default function GamePage() {
 
     setTimeout(() => {
       setShowXP(true)
+      setLastDoctorPts(roundPts)
+      setLastRobotPts(robotRoundPts)
       setScore(s => s + roundPts)
       setRobotScore(s => s + robotRoundPts)
     }, 3000)
@@ -472,22 +476,22 @@ export default function GamePage() {
               <div style={{
                 position: 'absolute', left: '5vw', top: '40%',
                 transform: 'translateY(-50%)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                 animation: 'xpFloat 2s ease-out forwards',
                 pointerEvents: 'none',
               }}>
-                <Image src="/XP Doctor.svg" alt="XP Doctor" width={148} height={78}
-                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#F2DF00', textShadow: '2px 2px 0 #000' }}>+{lastDoctorPts} XP</span>
+                <span style={{ fontSize: 'clamp(16px, 2.5vw, 36px)' }}>⭐</span>
               </div>
               <div style={{
                 position: 'absolute', right: '5vw', top: '40%',
                 transform: 'translateY(-50%)',
-                display: 'flex', flexDirection: 'column', alignItems: 'center',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                 animation: 'xpFloat 2s ease-out forwards',
                 pointerEvents: 'none',
               }}>
-                <Image src="/XP Robot.svg" alt="XP Robot" width={148} height={78}
-                  style={{ width: 'clamp(80px, 10vw, 148px)', height: 'auto' }} />
+                <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#00e5ff', textShadow: '2px 2px 0 #000' }}>+{lastRobotPts} XP</span>
+                <span style={{ fontSize: 'clamp(16px, 2.5vw, 36px)' }}>⭐</span>
               </div>
             </>
           )}
