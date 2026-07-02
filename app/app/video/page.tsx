@@ -23,6 +23,7 @@ export default function VideoPage() {
         ref={videoRef}
         src={VIDEO_URL}
         autoPlay
+        muted
         playsInline
         style={{ width: '100%', height: '100%', objectFit: 'contain' }}
       />
