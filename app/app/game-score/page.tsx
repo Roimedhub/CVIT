@@ -64,14 +64,13 @@ export default function GameScorePage() {
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', flex: 1, alignItems: 'center', justifyContent: 'space-around', gap: '4%' }}>
 
               {/* LEFT — Doctor */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4, flex: 1 }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
                   fontSize: 'clamp(13px, 1.8vw, 24px)',
                   color: '#F2DF00',
                   textShadow: '1px 1px 0 #000',
                   wordBreak: 'break-word',
-                  textAlign: 'center',
                 }}>{playerName}</span>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
@@ -79,27 +78,24 @@ export default function GameScorePage() {
                   color: '#F2DF00',
                   textShadow: '1px 1px 0 #000',
                   wordBreak: 'break-word',
-                  textAlign: 'center',
                 }}>{playerHospital}</span>
                 <img src="/doctor result game score.svg" alt="Doctor result"
                   style={{ width: '90%', height: 'auto', marginTop: 8 }} />
               </div>
 
               {/* RIGHT — Robot */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 4, flex: 1 }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
                   fontSize: 'clamp(13px, 1.8vw, 24px)',
                   color: '#00e5ff',
                   textShadow: '1px 1px 0 #000',
-                  textAlign: 'center',
                 }}>AutocathFFR</span>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
                   fontSize: 'clamp(10px, 1.3vw, 18px)',
                   color: '#00e5ff',
                   textShadow: '1px 1px 0 #000',
-                  textAlign: 'center',
                 }}>MedHub.AI</span>
                 <img src="/robot result game score.svg" alt="Robot result"
                   style={{ width: '90%', height: 'auto', marginTop: 8 }} />
