@@ -386,6 +386,8 @@ export default function GamePage() {
               color: '#ffffff',
               fontFamily: "'Press Start 2P', monospace",
               textAlign: 'center',
+              padding: 0,
+              lineHeight: 1,
             }}
             type="number"
             min="0" max="1" step="0.01"
