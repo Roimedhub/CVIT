@@ -66,14 +66,14 @@ export default function GameScorePage() {
               {/* Row 1: doctor name | AutocathFFR */}
               <span style={{
                 fontFamily: "'Pixelify Sans', sans-serif",
-                fontSize: 'clamp(10px, 1.4vw, 18px)',
+                fontSize: 'clamp(14px, 2vw, 26px)',
                 color: '#F2DF00',
                 textShadow: '1px 1px 0 #000',
                 wordBreak: 'break-word',
               }}>{playerName}</span>
               <span style={{
                 fontFamily: "'Pixelify Sans', sans-serif",
-                fontSize: 'clamp(10px, 1.4vw, 18px)',
+                fontSize: 'clamp(14px, 2vw, 26px)',
                 color: '#00e5ff',
                 textShadow: '1px 1px 0 #000',
                 textAlign: 'right',
@@ -82,14 +82,14 @@ export default function GameScorePage() {
               {/* Row 2: hospital | MedHub.AI */}
               <span style={{
                 fontFamily: "'Pixelify Sans', sans-serif",
-                fontSize: 'clamp(8px, 1.1vw, 15px)',
+                fontSize: 'clamp(11px, 1.5vw, 20px)',
                 color: '#F2DF00',
                 textShadow: '1px 1px 0 #000',
                 wordBreak: 'break-word',
               }}>{playerHospital}</span>
               <span style={{
                 fontFamily: "'Pixelify Sans', sans-serif",
-                fontSize: 'clamp(8px, 1.1vw, 15px)',
+                fontSize: 'clamp(11px, 1.5vw, 20px)',
                 color: '#00e5ff',
                 textShadow: '1px 1px 0 #000',
                 textAlign: 'right',
