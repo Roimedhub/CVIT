@@ -142,13 +142,13 @@ export default function GamePage() {
     // ── Scoring (max 50 per round) ──
     const doctorError = Math.abs(guessVal - currentCase.invasive)
     const robotError  = Math.abs(currentCase.autocath - currentCase.invasive)
-    const accuracyPts = Math.max(0, Math.round(30 - doctorError * 200))
+    const accuracyPts = Math.max(5, Math.round(30 - doctorError * 200))
     const speedBonus  = !showRobotBuzz ? 10 : 0   // submitted before robot buzzed
     const doctorWins  = doctorError <= robotError
     const closerBonus = doctorWins ? 10 : 0
     const roundPts    = accuracyPts + speedBonus + closerBonus   // max 50
 
-    const robotAccuracy  = Math.max(0, Math.round(30 - robotError * 200))
+    const robotAccuracy  = Math.max(5, Math.round(30 - robotError * 200))
     const robotRoundPts  = robotAccuracy + (doctorWins ? 0 : 10) // max 40
 
     setTimeout(() => {
