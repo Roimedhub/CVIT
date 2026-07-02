@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
@@ -19,6 +19,13 @@ export default function LeaderboardPage() {
   const [players, setPlayers] = useState<Player[]>([])
   const [page, setPage] = useState(0)
   const router = useRouter()
+  const videoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Cycle to video page after 60 seconds
+  useEffect(() => {
+    videoTimerRef.current = setTimeout(() => router.push('/video'), 60000)
+    return () => { if (videoTimerRef.current) clearTimeout(videoTimerRef.current) }
+  }, [router])
 
   useEffect(() => {
     supabase
