@@ -121,7 +121,7 @@ export default function GamePage() {
         fetch('/api/players', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: playerId, xp: 60 }),
+          body: JSON.stringify({ id: playerId, xp: score }),
         }).catch(console.error)
       }
       const t = setTimeout(() => setShowScore(true), 3000)
