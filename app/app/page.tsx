@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import BackgroundPattern from './components/BackgroundPattern'
@@ -250,12 +251,7 @@ export default function LoginPage() {
                 setPreloadMsg('Loading cases...')
                 try {
                   const STORAGE_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds`
-                  const { createClient } = await import('@supabase/supabase-js')
-                  const sb = createClient(
-                    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-                  )
-                  const { data } = await sb.from('game_rounds').select('video_file, frame_file')
+                  const { data } = await supabase.from('game_rounds').select('video_file, frame_file')
                   if (!data) { setPreloadMsg('✗ Failed to fetch cases'); setPreloading(false); return }
 
                   let done = 0
