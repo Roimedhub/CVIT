@@ -158,6 +158,9 @@ export default function GamePage() {
     const speedBonus  = !showRobotBuzz ? 10 : 0   // submitted before robot buzzed
     const doctorWins  = doctorError <= robotError
     const closerBonus = doctorWins ? 10 : 0
+    // Correct = doctor's classification (≤0.8 positive, >0.8 negative) matches invasive
+    const invasivePositive = currentCase.invasive <= 0.8
+    const doctorCorrect = (guessVal <= 0.8) === invasivePositive
     const roundPts    = accuracyPts + speedBonus + closerBonus   // max 50
 
     const robotAccuracy  = Math.max(5, Math.round(30 - robotError * 200))
@@ -176,7 +179,7 @@ export default function GamePage() {
       setScore(s => s + roundPts)
       setRobotScore(s => s + robotRoundPts)
       setRoundsPlayed(p => p + 1)
-      if (doctorWins) setRoundsWon(w => w + 1)
+      if (doctorCorrect) setRoundsWon(w => w + 1)
     }, 3000)
 
     setTimeout(() => {
