@@ -10,6 +10,8 @@ type Player = {
   name: string
   hospital: string
   xp: number
+  rounds_played: number
+  rounds_won: number
 }
 
 const PAGE_SIZE = 15
@@ -30,7 +32,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     supabase
       .from('cvit_players')
-      .select('id, name, hospital, xp')
+      .select('id, name, hospital, xp, rounds_played, rounds_won')
       .order('xp', { ascending: false })
       .limit(100)
       .then(({ data }) => { if (data) setPlayers(data) })
@@ -81,7 +83,12 @@ export default function LeaderboardPage() {
                   <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
                     {page * PAGE_SIZE + i + 1}. {p.name}
                   </span>
-                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>{p.xp} ⭐</span>
+                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                    <span>{p.xp} ⭐</span>
+                    {p.rounds_played > 0 && (
+                      <span style={{ color: '#aab4ff' }}>{p.rounds_won}/{p.rounds_played} ✓</span>
+                    )}
+                  </span>
                 </div>
               ))}
             </div>

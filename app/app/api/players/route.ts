@@ -37,7 +37,7 @@ export async function DELETE() {
 }
 
 export async function PATCH(req: NextRequest) {
-  const { id, xp } = await req.json()
+  const { id, xp, rounds_played, rounds_won } = await req.json()
 
   if (!id) {
     return NextResponse.json({ error: 'id is required' }, { status: 400 })
@@ -45,7 +45,7 @@ export async function PATCH(req: NextRequest) {
 
   const { error } = await supabase
     .from('cvit_players')
-    .update({ xp })
+    .update({ xp, rounds_played, rounds_won })
     .eq('id', id)
 
   if (error) {

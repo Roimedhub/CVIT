@@ -33,6 +33,8 @@ export default function GamePage() {
   const [round, setRound] = useState(1)
   const [score, setScore] = useState(0)
   const [robotScore, setRobotScore] = useState(0)
+  const [roundsPlayed, setRoundsPlayed] = useState(0)
+  const [roundsWon, setRoundsWon] = useState(0)
   const [countdown, setCountdown] = useState<number | 'GO!' | null>(3)
 
   const [timeLeft, setTimeLeft] = useState(90)
@@ -122,7 +124,7 @@ export default function GamePage() {
         fetch('/api/players', {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: playerId, xp: score }),
+          body: JSON.stringify({ id: playerId, xp: score, rounds_played: roundsPlayed, rounds_won: roundsWon }),
         }).catch(console.error)
       }
       const t = setTimeout(() => setShowScore(true), 3000)
@@ -173,6 +175,8 @@ export default function GamePage() {
       setLastRobotPts(robotRoundPts)
       setScore(s => s + roundPts)
       setRobotScore(s => s + robotRoundPts)
+      setRoundsPlayed(p => p + 1)
+      if (doctorWins) setRoundsWon(w => w + 1)
     }, 3000)
 
     setTimeout(() => {
