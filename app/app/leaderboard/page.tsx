@@ -30,9 +30,12 @@ export default function LeaderboardPage() {
   }, [router])
 
   useEffect(() => {
+    const todayStart = new Date()
+    todayStart.setHours(0, 0, 0, 0)
     supabase
       .from('cvit_players')
       .select('id, name, hospital, xp, rounds_played, rounds_won')
+      .gte('played_at', todayStart.toISOString())
       .order('xp', { ascending: false })
       .limit(100)
       .then(({ data }) => { if (data) setPlayers(data) })

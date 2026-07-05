@@ -23,10 +23,11 @@ export async function POST(req: NextRequest) {
 }
 
 export async function DELETE() {
+  // Move all players to the past — preserves data, hides from leaderboard
   const { error } = await supabase
     .from('cvit_players')
-    .delete()
-    .neq('id', '00000000-0000-0000-0000-000000000000') // delete all rows
+    .update({ played_at: '1970-01-01T00:00:00Z' })
+    .neq('id', '00000000-0000-0000-0000-000000000000')
 
   if (error) {
     console.error('Supabase error:', error)
