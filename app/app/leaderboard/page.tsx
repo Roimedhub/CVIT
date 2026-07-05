@@ -80,13 +80,15 @@ export default function LeaderboardPage() {
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: 'clamp(4px, 1vh, 12px)', overflowY: 'auto' }}>
               {visiblePlayers.map((p, i) => (
                 <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '2px 4px' }}>
-                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00', display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00' }}>
+                    {page * PAGE_SIZE + i + 1}. {p.name}
+                  </span>
+                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
                     {p.rounds_played > 0 && (
                       <span style={{ color: '#aab4ff' }}>{p.rounds_won}/{p.rounds_played}</span>
                     )}
-                    <span>{page * PAGE_SIZE + i + 1}. {p.name}</span>
+                    <span style={{ color: '#F2DF00' }}>{p.xp} ⭐</span>
                   </span>
-                  <span style={{ fontSize: 'clamp(7px, 0.85vw, 11px)', color: '#F2DF00', flexShrink: 0 }}>{p.xp} ⭐</span>
                 </div>
               ))}
             </div>
