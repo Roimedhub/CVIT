@@ -38,13 +38,16 @@ export default function GameScorePage() {
           style={{ width: 'clamp(240px, 38vw, 560px)', height: 'auto' }} priority />
       </div>
 
-      {/* Center row: DOCTOR | card | ROBOT */}
-      <div className="relative z-10 flex flex-row items-center justify-center w-full" style={{ maxWidth: '98vw' }}>
+      {/* Characters — fixed to bottom of screen */}
+      <div className="absolute z-10" style={{ bottom: 0, left: 0 }}>
+        <div className="doctor-score" />
+      </div>
+      <div className="absolute z-10" style={{ bottom: 0, right: 0 }}>
+        <div className="robot-score" />
+      </div>
 
-        {/* DOCTOR character — animated */}
-        <div style={{ flexShrink: 0 }}>
-          <div className="doctor-score" />
-        </div>
+      {/* Center row: card only */}
+      <div className="relative z-10 flex flex-row items-center justify-center w-full" style={{ maxWidth: '98vw' }}>
 
         {/* Card — smaller rectangle */}
         <div style={{ position: 'relative', width: 'clamp(260px, 38vw, 580px)', flexShrink: 0 }}>
@@ -121,10 +124,6 @@ export default function GameScorePage() {
           </div>
         </div>
 
-        {/* ROBOT character — animated */}
-        <div style={{ flexShrink: 0 }}>
-          <div className="robot-score" />
-        </div>
       </div>
     </div>
   )
