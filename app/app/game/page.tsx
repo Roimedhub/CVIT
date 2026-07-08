@@ -386,7 +386,7 @@ export default function GamePage() {
             style={{
               position: 'absolute',
               left: '3%', top: '50%', transform: 'translateY(-50%)',
-              width: '44%', height: '70%',
+              width: '44%',
               fontSize: 'clamp(12px, 1.6vw, 22px)',
               background: 'transparent',
               border: 'none', outline: 'none',
@@ -394,7 +394,6 @@ export default function GamePage() {
               fontFamily: "'Press Start 2P', monospace",
               textAlign: 'center',
               padding: 0,
-              verticalAlign: 'middle',
             }}
             type="number"
             min="0" max="1" step="0.01"
