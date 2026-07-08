@@ -230,7 +230,7 @@ export default function GamePage() {
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col gap-1">
-            <span className="text-white" style={{ fontSize: 13 }}>{playerName}</span>
+            <span className="text-white" style={{ fontSize: 9 }}>{playerName}</span>
             <div className="flex items-center gap-1">
               <span style={{ fontSize: 13, color: '#f8d20b' }}>{score}</span>
               <span style={{ fontSize: 16 }}>⭐</span>
@@ -261,7 +261,7 @@ export default function GamePage() {
               className="object-cover w-full h-full" />
           </div>
           <div className="flex flex-col items-end gap-1">
-            <span className="text-white" style={{ fontSize: 13 }}>AutocathFFR</span>
+            <span className="text-white" style={{ fontSize: 9 }}>AutocathFFR</span>
             <div className="flex items-center gap-1">
               <span style={{ fontSize: 16 }}>⭐</span>
               <span style={{ fontSize: 13, color: '#f8d20b' }}>{robotScore}</span>
