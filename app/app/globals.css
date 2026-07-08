@@ -65,6 +65,8 @@ button.btn-start:disabled {
   color: white;
   font-family: 'Press Start 2P', monospace;
   font-size: 11px;
+  display: block;
+  box-sizing: border-box;
 }
 
 .game-input:focus {

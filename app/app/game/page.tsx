@@ -385,7 +385,7 @@ export default function GamePage() {
             className="game-input"
             style={{
               position: 'absolute',
-              left: '3%', top: '40%', transform: 'translateY(-50%)',
+              left: '3%', top: '50%', transform: 'translateY(-50%)',
               width: '44%',
               fontSize: 'clamp(12px, 1.6vw, 22px)',
               background: 'transparent',
@@ -393,7 +393,8 @@ export default function GamePage() {
               color: '#ffffff',
               fontFamily: "'Press Start 2P', monospace",
               textAlign: 'center',
-              padding: 0,
+              padding: '0 4px',
+              lineHeight: 'normal',
             }}
             type="number"
             min="0" max="1" step="0.01"
