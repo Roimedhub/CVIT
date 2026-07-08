@@ -308,7 +308,7 @@ export default function LoginPage() {
               border: '4px solid #3a3aae',
               borderRadius: 16,
               padding: '40px 36px 36px',
-              maxWidth: 520,
+              maxWidth: 700,
               width: '90vw',
               position: 'relative',
               boxShadow: '0 8px 48px rgba(0,0,0,0.7)',
@@ -339,39 +339,11 @@ export default function LoginPage() {
               ×
             </button>
 
-            <p style={{
-              fontFamily: "'Press Start 2P', monospace",
-              fontSize: 'clamp(9px, 1.0vw, 12px)',
-              color: '#F2DF00',
-              lineHeight: 2.2,
-              margin: 0,
-              textAlign: 'center',
-            }}>
-              Welcome to Man vs Machine!{'\n'}
-              Compete against AutocathFFR AI in predicting FFR.{'\n'}
-              Each round shows an angiogram video and a marked lesion.{'\n'}
-              Type your FFR guess (e.g. 0.85) and press DONE!{'\n'}
-              Points are based on accuracy.{'\n'}
-              Guess before the AI buzzes in for a speed bonus.{'\n'}
-              Good luck!
-            </p>
-            <hr style={{ border: '1px solid #3a3aae', margin: '20px 0' }} />
-            <p style={{
-              fontFamily: 'sans-serif',
-              fontSize: 'clamp(11px, 1.1vw, 14px)',
-              color: '#aab4ff',
-              lineHeight: 2,
-              margin: 0,
-              textAlign: 'center',
-            }}>
-              Man vs Machineへようこそ！<br />
-              AutocathFFR AIとFFR予測を競い合います。<br />
-              各ラウンドでは冠動脈造影動画とマーキングされた病変が表示されます。<br />
-              FFR値を入力（例：0.85）してDONE!を押してください。<br />
-              得点は精度に基づきます。<br />
-              AIより先に回答するとスピードボーナスが得られます。<br />
-              頑張ってください！
-            </p>
+            <img
+              src="/TUTORIAL_GAME.png"
+              alt="Tutorial"
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8 }}
+            />
           </div>
         </div>
       )}
