@@ -183,12 +183,12 @@ export default function GamePage() {
     }, 3000)
 
     setTimeout(() => {
-      setShowXP(false)
       setShowRoundResult(false)
       setShowNextRound(true)
     }, 7000)
 
     setTimeout(() => {
+      setShowXP(false)
       setShowNextRound(false)
       setRound(r => r + 1)
       setTimerActive(true)
@@ -569,8 +569,9 @@ export default function GamePage() {
           100% { transform: scale(0.7); opacity: 0; }
         }
         @keyframes xpFloat {
-          0%   { transform: translateY(0); opacity: 1; }
-          100% { transform: translateY(-60px); opacity: 0; }
+          0%   { transform: translateY(0);     opacity: 0; }
+          15%  { transform: translateY(-30px); opacity: 1; }
+          100% { transform: translateY(-40px); opacity: 1; }
         }
       `}</style>
     </div>
