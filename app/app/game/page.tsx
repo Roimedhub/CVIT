@@ -428,7 +428,7 @@ export default function GamePage() {
       {/* ── ROUND RESULT POPUP ── */}
       {showRoundResult && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-start"
-          style={{ background: 'rgba(0,0,0,0.6)', paddingTop: '14vh' }}>
+          style={{ background: 'transparent', paddingTop: '14vh' }}>
 
           {/* ── ROUND SUMMARY CARD ── */}
           <div style={{ position: 'relative', width: 'clamp(320px, 70vw, 900px)' }}>
@@ -497,7 +497,7 @@ export default function GamePage() {
                 transform: 'translateY(-50%)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                 animation: 'xpFloat 2s ease-out forwards',
-                pointerEvents: 'none',
+                pointerEvents: 'none', zIndex: 70,
               }}>
                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#F2DF00', textShadow: '2px 2px 0 #000' }}>+{lastDoctorPts} XP</span>
                 <span style={{ fontSize: 'clamp(16px, 2.5vw, 36px)' }}>⭐</span>
@@ -507,7 +507,7 @@ export default function GamePage() {
                 transform: 'translateY(-50%)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
                 animation: 'xpFloat 2s ease-out forwards',
-                pointerEvents: 'none',
+                pointerEvents: 'none', zIndex: 70,
               }}>
                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#00e5ff', textShadow: '2px 2px 0 #000' }}>+{lastRobotPts} XP</span>
                 <span style={{ fontSize: 'clamp(16px, 2.5vw, 36px)' }}>⭐</span>
