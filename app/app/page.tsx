@@ -308,8 +308,8 @@ export default function LoginPage() {
               border: '4px solid #3a3aae',
               borderRadius: 16,
               padding: '40px 36px 36px',
-              maxWidth: 700,
-              width: '90vw',
+              maxWidth: 900,
+              width: '92vw',
               position: 'relative',
               boxShadow: '0 8px 48px rgba(0,0,0,0.7)',
             }}
