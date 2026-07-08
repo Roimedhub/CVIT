@@ -365,10 +365,12 @@ export default function LoginPage() {
               textAlign: 'center',
             }}>
               Man vs Machineへようこそ！<br />
-              AutocathFFR AIと競い合います。<br />
-              冠動脈造影動画とフレームが表示されます。<br />
-              FFR値を入力してDONE!を押して送信。<br />
-              90秒でAIを倒してみよう！
+              AutocathFFR AIとFFR予測を競い合います。<br />
+              各ラウンドでは冠動脈造影動画とマーキングされた病変が表示されます。<br />
+              FFR値を入力（例：0.85）してDONE!を押してください。<br />
+              得点は精度に基づきます。<br />
+              AIより先に回答するとスピードボーナスが得られます。<br />
+              頑張ってください！
             </p>
           </div>
         </div>
