@@ -348,12 +348,12 @@ export default function LoginPage() {
               textAlign: 'center',
             }}>
               Welcome to Man vs Machine!{'\n'}
-              The game is a competition between you and the AI in predicting FFR result.{'\n'}
-              Each round an angiogram and a frame with lesion(s) marking will be presented.{'\n'}
-              Your goal is to guess the FFR value of the vessel and be accurate versus the invasive FFR wire result.{'\n'}
-              You get extra points for guessing the result before the AI does.{'\n'}
-              Try to beat the AI in 90 seconds.{'\n'}
-              Goodluck!
+              Compete against AutocathFFR AI in predicting FFR.{'\n'}
+              Each round shows an angiogram video and a marked lesion.{'\n'}
+              Type your FFR guess (e.g. 0.85) and press DONE!{'\n'}
+              Points are based on accuracy.{'\n'}
+              Guess before the AI buzzes in for a speed bonus.{'\n'}
+              Good luck!
             </p>
             <hr style={{ border: '1px solid #3a3aae', margin: '20px 0' }} />
             <p style={{
