@@ -73,14 +73,14 @@ export default function GameScorePage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, flex: 1, paddingLeft: '8%' }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
-                  fontSize: 'clamp(13px, 1.8vw, 24px)',
+                  fontSize: 'clamp(20px, 2.8vw, 42px)',
                   color: '#F2DF00',
                   textShadow: '1px 1px 0 #000',
                   wordBreak: 'break-word',
                 }}>{playerName}</span>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
-                  fontSize: 'clamp(10px, 1.3vw, 18px)',
+                  fontSize: 'clamp(16px, 2.2vw, 34px)',
                   color: '#F2DF00',
                   textShadow: '1px 1px 0 #000',
                   wordBreak: 'break-word',
@@ -100,13 +100,13 @@ export default function GameScorePage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2, flex: 1, paddingLeft: '8%' }}>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
-                  fontSize: 'clamp(13px, 1.8vw, 24px)',
+                  fontSize: 'clamp(20px, 2.8vw, 42px)',
                   color: '#00e5ff',
                   textShadow: '1px 1px 0 #000',
                 }}>AutocathFFR</span>
                 <span style={{
                   fontFamily: "'Pixelify Sans', sans-serif",
-                  fontSize: 'clamp(10px, 1.3vw, 18px)',
+                  fontSize: 'clamp(16px, 2.2vw, 34px)',
                   color: '#00e5ff',
                   textShadow: '1px 1px 0 #000',
                 }}>MedHub.AI</span>
