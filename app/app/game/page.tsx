@@ -496,7 +496,7 @@ export default function GamePage() {
                 position: 'absolute', left: '5vw', top: '40%',
                 transform: 'translateY(-50%)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                animation: 'xpFloat 2s ease-out forwards',
+                animation: 'xpFloat 7s linear forwards',
                 pointerEvents: 'none', zIndex: 70,
               }}>
                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#F2DF00', textShadow: '2px 2px 0 #000' }}>+{lastDoctorPts} XP</span>
@@ -506,7 +506,7 @@ export default function GamePage() {
                 position: 'absolute', right: '5vw', top: '40%',
                 transform: 'translateY(-50%)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-                animation: 'xpFloat 2s ease-out forwards',
+                animation: 'xpFloat 7s linear forwards',
                 pointerEvents: 'none', zIndex: 70,
               }}>
                 <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 'clamp(10px, 1.4vw, 18px)', color: '#00e5ff', textShadow: '2px 2px 0 #000' }}>+{lastRobotPts} XP</span>
@@ -569,9 +569,9 @@ export default function GamePage() {
           100% { transform: scale(0.7); opacity: 0; }
         }
         @keyframes xpFloat {
-          0%   { transform: translateY(0);     opacity: 0; }
-          15%  { transform: translateY(-30px); opacity: 1; }
-          100% { transform: translateY(-40px); opacity: 1; }
+          0%   { transform: translateY(0);      opacity: 0; }
+          8%   { transform: translateY(-10px);  opacity: 1; }
+          100% { transform: translateY(-35vh);  opacity: 1; }
         }
       `}</style>
     </div>
