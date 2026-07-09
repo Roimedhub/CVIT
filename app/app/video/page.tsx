@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
-const VIDEO_URL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/game-rounds/GAME_Engagement_video_new_new.mp4`
+const VIDEO_URL = 'https://kdrweurtenixsvjcfxdi.supabase.co/storage/v1/object/public/game-rounds/Marketing_Video.mp4'
 
 export default function VideoPage() {
   const router = useRouter()
