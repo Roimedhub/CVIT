@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -16,6 +16,12 @@ export default function LoginPage() {
   const [preloadMsg, setPreloadMsg] = useState('')
   const [preloading, setPreloading] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    if (name || hospital) return
+    const t = setTimeout(() => router.push('/leaderboard'), 30000)
+    return () => clearTimeout(t)
+  }, [name, hospital, router])
 
   const handleStart = async () => {
     if (!name.trim() || !hospital.trim()) return
