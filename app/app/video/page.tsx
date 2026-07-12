@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
-const VIDEO_URL = 'https://kdrweurtenixsvjcfxdi.supabase.co/storage/v1/object/public/game-rounds/Marketing_Video.mp4'
+const VIDEO_URL = 'https://kdrweurtenixsvjcfxdi.supabase.co/storage/v1/object/public/game-rounds/MARKETING_VIDEO.mp4'
 
 export default function VideoPage() {
   const router = useRouter()
