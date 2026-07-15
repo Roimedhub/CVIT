@@ -30,8 +30,11 @@ export default function LeaderboardPage() {
   }, [router])
 
   useEffect(() => {
-    const todayStart = new Date()
-    todayStart.setHours(0, 0, 0, 0)
+    // Midnight JST (UTC+9): get today's date in JST, then express as UTC
+    const now = new Date()
+    const jstOffset = 9 * 60 // minutes
+    const jstNow = new Date(now.getTime() + jstOffset * 60000)
+    const todayStart = new Date(Date.UTC(jstNow.getUTCFullYear(), jstNow.getUTCMonth(), jstNow.getUTCDate()) - jstOffset * 60000)
     supabase
       .from('cvit_players')
       .select('id, name, hospital, xp, rounds_played, rounds_won')
